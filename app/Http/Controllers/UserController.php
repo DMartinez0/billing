@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Resources\UserResource;
 use App\Models\User;
-use App\Http\Resources\RegisterResource;
+use Illuminate\Http\Request;
 
-class RegisterController extends Controller
+class UserController extends Controller
 {
-
     public function __construct()
     {
         // $this->middleware('auth:api')
@@ -20,7 +19,7 @@ class RegisterController extends Controller
     {
         $users = User::all();
         // return response()->json($users);
-        return RegisterResource::collection($users);
+        return UserResource::collection($users);
     }
 
     public function show($id)
@@ -30,7 +29,7 @@ class RegisterController extends Controller
             return response()->json(['message' => 'User not found!'], 404);
         }
         // return response()->json($user, 200);
-        return RegisterResource::make($user);
+        return UserResource::make($user);
     }
     
 

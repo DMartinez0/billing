@@ -3,16 +3,15 @@
 use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\UserController;
 
+Route::post('register', [UserController::class, 'store'])->name('users.register');
 
-Route::post('register', [RegisterController::class, 'store'])->name('users.register');
+Route::get('users', [UserController::class, 'index'])->name('users');
 
-Route::get('users', [RegisterController::class, 'index'])->name('users');
+Route::get('users/{id}', [UserController::class, 'show'])->name('users.show');
 
-Route::get('users/{id}', [RegisterController::class, 'show'])->name('users.show');
-
-Route::delete('users/{id}', [RegisterController::class, 'destroy'])->name('users.destroy');
+Route::delete('users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
 
 Route::get('/', function () {
     
