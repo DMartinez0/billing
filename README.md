@@ -1,14 +1,15 @@
 
-# Connect by Hibrido
+# Billing by Hibrido
 
-Development api pos repository
+API de administración de factura electrónica
 
 ## Installation
 
-Install connect with composer
+Install billing via composer
 
 ```bash
-  git clone https://github.com/hibridosv/connect.git
-  cd connect
+  git clone https://github.com/hibridosv/billing.git
+  cd billing
   composer install
+  php artisan migrate --seed
 ```

@@ -23,9 +23,9 @@ Route::get('/', function () {
 });
 
 
-Route::controller(ProductController::class)->group(function () {
-    Route::get('products', 'index');
-    Route::get('products/{id}', 'show');
-    Route::post('products', 'store');
-    Route::delete('products/{id}', 'destroy');
-});
+// Route::controller(ProductController::class)->group(function () {
+//     Route::get('products', 'index');
+//     Route::get('products/{id}', 'show');
+//     Route::post('products', 'store');
+//     Route::delete('products/{id}', 'destroy');
+// });
