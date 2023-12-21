@@ -1,0 +1,121 @@
+{
+  "identificacion": {
+    "version": 1,
+    "ambiente": "00",
+    "tipoDte": "01",
+    "numeroControl": "DTE-01-00000000-000000000000004",
+    "codigoGeneracion": "D45CD5DD-8831-46F7-95C0-2BBF31259AEE",
+    "tipoModelo": 1,
+    "tipoOperacion": 1,
+    "tipoContingencia": null,
+    "motivoContin": null,
+    "fecEmi": "2023-12-20",
+    "horEmi": "15:15:57",
+    "tipoMoneda": "USD"
+  },
+  "documentoRelacionado": null,
+  "emisor": {
+    "nit": "02072103861029",
+    "nrc": "2800134",
+    "nombre": "ERICK ADONAI NUNEZ MARTINEZ",
+    "codActividad": "63990",
+    "descActividad": "Programación informatica",
+    "nombreComercial": "Hibrido",
+    "tipoEstablecimiento": "02",
+    "direccion": {
+      "departamento": "02",
+      "municipio": "07",
+      "complemento": "Urb. Las Americas 1, Pol. I #4"
+    },
+    "telefono": "60623882",
+    "correo": "aerick.nunez@gmail.com",
+    "codEstableMH": null,
+    "codEstable": null,
+    "codPuntoVentaMH": null,
+    "codPuntoVenta": null
+  },
+  "receptor": null,
+  "otrosDocumentos": null,
+  "ventaTercero": null,
+  "cuerpoDocumento": [
+    {
+      "numItem": 1,
+      "tipoItem": 1,
+      "numeroDocumento": null,
+      "cantidad": 1,
+      "codigo": null,
+      "codTributo": null,
+      "uniMedida": 26,
+      "descripcion": "Formación profesional calidad JRecinos",
+      "precioUni": 18.98,
+      "montoDescu": 3.9858,
+      "ventaNoSuj": 0,
+      "ventaExenta": 0,
+      "ventaGravada": 14.99,
+      "tributos": null,
+      "psv": 0,
+      "noGravado": 0,
+      "ivaItem": 1.724645
+    },
+    {
+      "numItem": 2,
+      "tipoItem": 1,
+      "numeroDocumento": null,
+      "cantidad": 1,
+      "codigo": null,
+      "codTributo": null,
+      "uniMedida": 40,
+      "descripcion": "Libro JRecinos",
+      "precioUni": 14.5,
+      "montoDescu": 0,
+      "ventaNoSuj": 0,
+      "ventaExenta": 0,
+      "ventaGravada": 14.5,
+      "tributos": null,
+      "psv": 0,
+      "noGravado": 0,
+      "ivaItem": 1.668277
+    }
+  ],
+  "resumen": {
+    "totalNoSuj": 0,
+    "totalExenta": 0,
+    "totalGravada": 29.49,
+    "subTotalVentas": 29.49,
+    "descuNoSuj": 0,
+    "descuExenta": 0,
+    "descuGravada": 0,
+    "porcentajeDescuento": 0,
+    "totalDescu": 3.99,
+    "tributos": [],
+    "subTotal": 29.49,
+    "ivaRete1": 0,
+    "reteRenta": 0,
+    "montoTotalOperacion": 29.49,
+    "totalNoGravado": 0,
+    "totalPagar": 29.49,
+    "totalLetras": "CIENTO CINCUENTA DÓLARES ",
+    "totalIva": 3.39,
+    "saldoFavor": 0,
+    "condicionOperacion": 1,
+    "pagos": [
+      {
+        "codigo": "01",
+        "montoPago": 29.49,
+        "plazo": null,
+        "referencia": null,
+        "periodo": null
+      }
+    ],
+    "numPagoElectronico": null
+  },
+  "extension": {
+    "nombEntrega": null,
+    "docuEntrega": null,
+    "nombRecibe": null,
+    "docuRecibe": null,
+    "observaciones": null,
+    "placaVehiculo": null
+  },
+  "apendice": null
+}
