@@ -30,6 +30,7 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->routes(function () {
 
+            // $api = ['api', 'auth:api'];
             $api = ['api'];
             $web = ['web'];
 
@@ -38,11 +39,12 @@ class RouteServiceProvider extends ServiceProvider
                 array_push($web, 'tenant.web');
             }
             
-            Route::middleware('api')
+            
+            Route::middleware($api)
                 ->prefix('api')
                 ->group(base_path('routes/api.php'));
 
-            Route::middleware('web')
+            Route::middleware($web)
                 ->group(base_path('routes/web.php'));
         });
     }

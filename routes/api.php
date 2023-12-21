@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DocumentsController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -22,9 +23,9 @@ Route::get('/', function () {
 });
 
 
-// Route::controller(ProductController::class)->group(function () {
-//     Route::get('products', 'index');
-//     Route::get('products/{id}', 'show');
-//     Route::post('products', 'store');
-//     Route::delete('products/{id}', 'destroy');
-// });
+Route::controller(DocumentsController::class)->group(function () {
+    // Route::get('documents', 'index');
+    // Route::get('documents/{id}', 'show');
+    Route::post('documents', 'store');
+    // Route::delete('documents/{id}', 'destroy');
+});

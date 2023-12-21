@@ -36,7 +36,7 @@ return new class extends Migration
             $table->foreign('user_id')
                             ->references('id')
                             ->on('users');
-            $table->integer('status')->comment('1: activo, 0 Inactivo'); 
+            $table->integer('status')->comment('1: activo, 2: Suspendido, 0: Inactivo'); 
             $table->timestamps();
         });
     }
