@@ -1,6 +1,7 @@
 <?php
 namespace App\System\Services;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Http;
 
 trait EnviarDTE {

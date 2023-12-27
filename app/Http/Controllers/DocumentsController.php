@@ -7,12 +7,12 @@ use App\Models\Client;
 use App\System\Services\EnviarDTE;
 use App\System\Services\Firmador;
 use App\System\Services\GuardarDTE;
-
+use App\System\Services\ModificarJson;
 
 class DocumentsController extends Controller
 {
 
-    use Firmador, GuardarDTE, EnviarDTE;
+    use Firmador, GuardarDTE, EnviarDTE, ModificarJson;
     /*
     * @ Guarda, Firma, Envia y valida el documento
     * @nit
@@ -27,6 +27,8 @@ class DocumentsController extends Controller
         // Obtener datos del cliente
         $cliente = Client::where('nit', $request->nit)->first();
         if(!$cliente) return errorResponse("No se encuentra el cliente");
+        // Agregar el emsor desde la base de datos
+        $request = $this->agregarEmisor($request, $cliente);
         // Guardar documento sin firmar y obtener el id
         $documentId = $this->guardarDocument($request, $cliente); ///
         // Firmar documento
