@@ -14,22 +14,23 @@ return new class extends Migration
         Schema::create('documents', function (Blueprint $table) {
             $table->uuid('id')->primary();
 
-            $table->string('ambiente');
-            $table->string('id_envio')->comment('Numero a discresion para identificar el documento');
-            $table->string('numero_control')->comment('Numero de factura segun el MH'); // numero de factura
-            $table->uuid('codigo_generacion')->comment('Uuid unico de cada documento'); // unico uuid
-            $table->integer('version');
-            $table->string('tipo_dte');
+            $table->string('ambiente')->nullable();
+            $table->string('id_envio')->nullable()->comment('Numero a discresion para identificar el documento');
+            $table->string('numero_control')->nullable()->comment('Numero de factura segun el MH'); // numero de factura
+            $table->uuid('codigo_generacion')->nullable()->comment('Uuid unico de cada documento'); // unico uuid
+            $table->integer('version')->nullable();
+            $table->string('tipo_dte')->nullable();
             
-            $table->json('documento_json')->comment('Documento Original');
-            $table->text('documento_firmado')->comment('Documento convertido a JWT o firmado');
-            $table->json('documento_sellado')->comment('Documento final del cliente'); // documento final
+            $table->json('documento_json')->nullable()->comment('Documento Original');
+            $table->text('documento_firmado')->nullable()->comment('Documento convertido a JWT o firmado');
+            $table->json('documento_sellado')->nullable()->comment('Documento final del cliente'); // documento final
             
-            $table->string('sello_recibido')->comment('Sello que devuelve de recibido');
-            $table->string('fecha_procesamiento');
-            $table->string('clasificacion_msg');
-            $table->string('codigo_msg');
-            $table->string('descripcion_msg');
+            $table->string('sello_recibido')->nullable()->comment('Sello que devuelve de recibido');
+            $table->string('fecha_procesamiento')->nullable();
+            $table->string('clasificacion_msg')->nullable();
+            $table->string('codigo_msg')->nullable();
+            $table->string('descripcion_msg')->nullable();
+            $table->string('observaciones')->nullable();
 
             
             $table->uuid('client_id')->nullable();
@@ -37,9 +38,9 @@ return new class extends Migration
                             ->references('id')
                             ->on('clients');
 
-            $table->uuid('id_sistema')->comment('Unico uuid del sistema que emite');
+            $table->uuid('id_sistema')->nullable()->comment('Unico uuid del sistema que emite');
     
-            $table->integer('status')->comment('1: Recibido, 2: Firmado, 3: Rechazado, 4: Procesado'); 
+            $table->integer('status')->nullable()->comment('1: Recibido, 2: Firmado, 3: Rechazado, 4: Procesado'); 
 
             $table->timestamps();
         });

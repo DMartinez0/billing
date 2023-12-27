@@ -3,36 +3,47 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\DocumentsRequest;
-use App\System\Validations\validations;
-use Illuminate\Http\Request;
-use phpseclib3\File\ASN1\Maps\Certificate;
-use SimpleXMLElement;
+use App\Models\Client;
+use App\System\Services\EnviarDTE;
+use App\System\Services\Firmador;
+use App\System\Services\GuardarDTE;
+
 
 class DocumentsController extends Controller
 {
 
-    use validations;
+    use Firmador, EnviarDTE, GuardarDTE;
     /*
     * @ Guarda, Firma, Envia y valida el documento
     * @nit
     * @passwordPri
     * @dteJson
     * @id_sistema
+    * @idEnvio // campo a discresion (uuid de factura)(NO SE USARA)
     */
     public function store(DocumentsRequest $request)
     {
-        $certificate = $this->CertificateToJson($request);
-        if (!$certificate) return errorResponse("No se encuentra un certificado valido");
-        if (!$this->IsValidated($request, $certificate)) return errorResponse("Sus datos no coinciden");
- 
-        // return successResponse();
-        $firma = $this->generateJWT($request->dteJson, $certificate['privateKey']['encodied']);
-        // return $request->all();
-        // $cer = $this->IsValidated($request);
-        // return successResponse();
-        return response()->json([
-            "certificado" => $firma,
-        ], 200);
+        // Filtrar campos de validacion (Se realiza en DocumentsRequest)
+        // Obtener datos del cliente
+        $cliente = Client::where('nit', $request->nit)->first();
+        if(!$cliente) return errorResponse("No se encuentra el cliente");
+        // Guardar documento sin firmar y obtener el id
+        $documentId = $this->guardarDocument($request, $cliente); ///
+        // Firmar documento
+        $firma = $this->firmarDocumento($request);
+        if ($firma) {
+            // Guardar documento Firmado (o solo la firma)
+            $this->guardarFirma($documentId, $firma); //
+            // Enviar documento a MH
+            $dte = $this->dte($request, $firma);
+            if ($dte) {
+                $this->procesarDTE($request, $documentId, $firma, $dte);
+                return $dte;
+            }
+            return errorResponse("Error al procesar DTE");
+        } else {
+            return errorResponse("Error al firmar el documento");
+        }
     }
 
 
