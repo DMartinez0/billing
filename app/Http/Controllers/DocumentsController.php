@@ -12,7 +12,7 @@ use App\System\Services\GuardarDTE;
 class DocumentsController extends Controller
 {
 
-    use Firmador, EnviarDTE, GuardarDTE;
+    use Firmador, GuardarDTE, EnviarDTE;
     /*
     * @ Guarda, Firma, Envia y valida el documento
     * @nit
@@ -32,19 +32,9 @@ class DocumentsController extends Controller
         // Firmar documento
         $firma = $this->firmarDocumento($request);
         if ($firma) {
-            // Guardar documento Firmado (o solo la firma)
-            $this->guardarFirma($documentId, $firma); //
-            // Enviar documento a MH
-            $dte = $this->dte($request, $firma);
-            if ($dte) {
-                $this->procesarDTE($request, $documentId, $firma, $dte);
-                return $dte;
-            }
-            return errorResponse("Error al procesar DTE");
+            return $this->procesarDTE($request, $documentId, $firma);
         } else {
             return errorResponse("Error al firmar el documento");
         }
     }
-
-
 }

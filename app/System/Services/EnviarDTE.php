@@ -5,6 +5,27 @@ use Illuminate\Support\Facades\Http;
 
 trait EnviarDTE {
 
+
+    public function procesarDTE($request, $documentId, $firma)
+    {
+        $dte = $this->dte($request, $firma);
+        if ($dte) {
+            if ($dte['estado'] == "RECHAZADO") {
+                // Guardar los dados de rechazo
+                $this->guardarRechazado($documentId, $dte);
+            } else {
+            // Guardar la respuesta del MH (selloRecibido)
+            $sellado = Arr::add($request->dteJson, 'firmaElectronica', $firma);
+            $this->guardarProcesado($sellado, $documentId, $dte); //
+            // Enviar email al Cliente
+            // $this->enviarEmail($request); //
+            }
+            return $dte;
+        } 
+        return errorResponse("Error al procesar DTE");
+    }
+
+    
         /**
         *@ambiente "00",
         *@idEnvio // numero a discrecion, = codigoGeneracion
@@ -20,7 +41,7 @@ trait EnviarDTE {
        return Http::withHeaders([
                 'Accept' => 'application/json',
                 'Content-Type' => 'application/json',
-                'Authorization' => 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwMjA3MjEwMzg2MTAyOSIsImF1dGhvcml0aWVzIjpbIlVTRVIiLCJVU0VSX0FQSSIsIlVzdWFyaW8iXSwiaWF0IjoxNzAzNjIzNjExLCJleHAiOjE3MDM3MTAwMTF9.zicE7iggr51a5bHfuNeY9rNmyXLfP-pyMchDiIa5l1RE-Py06KXpWj9ceBb_uf_1h8c8BVsf-mkWOuXGHDDRvw'
+                'Authorization' => 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwMjA3MjEwMzg2MTAyOSIsImF1dGhvcml0aWVzIjpbIlVTRVIiLCJVU0VSX0FQSSIsIlVzdWFyaW8iXSwiaWF0IjoxNzAzNzEwNjA5LCJleHAiOjE3MDM3OTcwMDl9.EgR2j--aZco1Iu0tgPc3SaadzXIcQiRiRPps2ikqbhupq1PW-UlhY5jQRHWs4rIYR7ScUHn7jZXdtOlqzTfauQ'
             ])
             ->post($this->getUrl($request), [
                 'ambiente' => $request->dteJson['identificacion']['ambiente'],

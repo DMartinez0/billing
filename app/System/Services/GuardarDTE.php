@@ -6,6 +6,7 @@ use Illuminate\Support\Arr;
 
 trait GuardarDTE {
 
+    use EnviarDTE;
 
     public function guardarDocument($request, $cliente)
     {
@@ -32,20 +33,6 @@ trait GuardarDTE {
         Document::where('id', $documentId)->update(['documento_firmado' => $firma, 'status' => 2]);
     }
 
-
-    public function procesarDTE($request, $documentId, $firma, $dte)
-    {
-        if ($dte['estado'] == "RECHAZADO") {
-            // Guardar los dados de rechazo
-            $this->guardarRechazado($documentId, $dte);
-        } else {
-        // Guardar la respuesta del MH (selloRecibido)
-        $sellado = Arr::add($request->dteJson, 'firmaElectronica', $firma);
-        $this->guardarProcesado($sellado, $documentId, $dte); //
-        // Enviar email al Cliente
-        // $this->enviarEmail($request); //
-        }
-    }
 
     public function guardarRechazado($documentId, $dte)
     {
