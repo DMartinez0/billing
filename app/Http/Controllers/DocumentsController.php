@@ -34,7 +34,8 @@ class DocumentsController extends Controller
         // Firmar documento
         $firma = $this->firmarDocumento($request);
         if ($firma) {
-            return $this->procesarDTE($request, $documentId, $firma);
+            $this->guardarFirma($documentId, $firma);
+            return $this->procesarDTE($request, $documentId, $firma, $cliente);
         } else {
             return errorResponse("Error al firmar el documento");
         }

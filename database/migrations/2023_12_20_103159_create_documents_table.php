@@ -30,7 +30,7 @@ return new class extends Migration
             $table->string('clasificacion_msg')->nullable();
             $table->string('codigo_msg')->nullable();
             $table->string('descripcion_msg')->nullable();
-            $table->string('observaciones')->nullable();
+            $table->text('observaciones')->nullable();
 
             
             $table->uuid('client_id')->nullable();

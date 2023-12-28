@@ -2,14 +2,13 @@
 namespace App\System\Services;
 
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Http;
 
 trait ModificarJson {
 
 
     public function agregarEmisor($request, $cliente)
     {
-        $emisor = [];
+        $emisor = array();
         $emisor["nit"] = $cliente->nit;
         $emisor["nrc"] = $cliente->ncr;
         $emisor["nombre"] = $cliente->nombre;
@@ -27,10 +26,25 @@ trait ModificarJson {
         $emisor["codPuntoVentaMH"] = $cliente->cod_punto_venta_mh;
         $emisor["codPuntoVenta"] = $cliente->cod_punto_venta;
 
-        $json = Arr::add($request->dteJson, 'emisor', $emisor);
-        return $json;
+        $requestArray = $request->all();
+        Arr::set($requestArray, 'dteJson.emisor', $emisor);
+        $request = (object) $requestArray;
+        return $request;
     }
 
+
+    public function agregarSellos($request, $firma, $dte)
+    {
+        $newFirma = array();
+        $newFirma["firmaElectronica"] = $firma;
+        $newSello["selloRecibido"] = $dte['selloRecibido'];
+
+        $requestArray = json_decode($request);
+        Arr::set($requestArray, 'dteJson.firmaElectronica', $newFirma);
+        Arr::set($requestArray, 'dteJson.selloRecibido', $newSello);
+        $request = (object) $requestArray;
+        return $request;
+    }
 
 
 }

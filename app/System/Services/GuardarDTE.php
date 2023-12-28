@@ -6,8 +6,6 @@ use Illuminate\Support\Arr;
 
 trait GuardarDTE {
 
-    use EnviarDTE;
-
     public function guardarDocument($request, $cliente)
     {
        $document =  Document::create([
@@ -47,10 +45,10 @@ trait GuardarDTE {
     }
 
 
-    public function guardarProcesado($sellado, $documentId, $dte)
+    public function guardarProcesado($firmado, $documentId, $dte)
     {   
         Document::where('id', $documentId)->update([
-            'documento_sellado' => json_encode(Arr::add($sellado, 'selloRecibido', $dte['selloRecibido'])), 
+            'documento_sellado' => json_encode($firmado), 
             'sello_recibido' => $dte['selloRecibido'], 
             'fecha_procesamiento' => $dte['fhProcesamiento'], 
             'clasificacion_msg' => $dte['clasificaMsg'], 

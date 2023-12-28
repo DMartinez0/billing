@@ -101,3 +101,39 @@ Este archivo es de helpers globales para su uso solo debe llamarse la funcion
       return $date->isoFormat('MMMM');
    }
 
+
+
+   
+   function nombreDepartamento($idDepartamento) {
+      $rutaArchivoJson = public_path('el-salvador.json');
+      if (file_exists($rutaArchivoJson)) {
+         $contenidoJson = file_get_contents($rutaArchivoJson);
+         $data = json_decode($contenidoJson, true);
+  
+         foreach ($data['departamentos'] as $departamento) {
+            if ($departamento['id'] == $idDepartamento) {
+               return $departamento['nombre'];
+            }
+         }
+      }
+      return null; // Departamento no encontrado
+  }
+  
+  function nombreMunicipio($idDepartamento, $idMunicipio) {
+      $rutaArchivoJson = public_path('el-salvador.json');
+      if (file_exists($rutaArchivoJson)) {
+         $contenidoJson = file_get_contents($rutaArchivoJson);
+         $data = json_decode($contenidoJson, true);
+  
+         foreach ($data['departamentos'] as $departamento) {
+            if ($departamento['id'] == $idDepartamento) {
+               foreach ($departamento['municipios'] as $municipio) {
+                  if ($municipio['id_mun'] == $idDepartamento."".$idMunicipio) {
+                     return $municipio['nombre'];
+                  }
+               }
+            }
+         }
+      }
+      return $idDepartamento."".$idMunicipio; // Municipio no encontrado
+  }

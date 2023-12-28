@@ -3,24 +3,47 @@ namespace App\System\Services;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 trait EnviarDTE {
 
+    use GenerarArchivos, EnviarEmail, GuardarDTE;
 
-    public function procesarDTE($request, $documentId, $firma)
+    public function procesarDTE($request, $documentId, $firma, $cliente)
     {
-        $dte = $this->dte($request, $firma);
+                // $dte = $this->dte($request, $firma);
+        $dtex = '{
+            "version": 2,
+            "ambiente": "00",
+            "versionApp": 2,
+            "estado": "PROCESADO",
+            "codigoGeneracion": "D45CD5DD-8831-46F7-9210-2DA2BC24254E",
+            "selloRecibido": "202305B6BF2ED55244D5B05D293CBE500A73666S",
+            "fhProcesamiento": "28/12/2023 04:07:35",
+            "clasificaMsg": "10",
+            "codigoMsg": "001",
+            "descripcionMsg": "RECIBIDO",
+            "observaciones": []
+            }';
+        $dte = json_decode($dtex, true);
+
         if ($dte) {
             if ($dte['estado'] == "RECHAZADO") {
                 // Guardar los dados de rechazo
                 $this->guardarRechazado($documentId, $dte);
             } else {
             // Guardar la respuesta del MH (selloRecibido)
-            $sellado = Arr::add($request->dteJson, 'firmaElectronica', $firma);
+            $firmado = Arr::add($request->dteJson, 'firmaElectronica', $firma);
+            $sellado = Arr::add($firmado, 'selloRecibido', $dte['selloRecibido']);
             $this->guardarProcesado($sellado, $documentId, $dte); //
             // Enviar email al Cliente
-            // $this->enviarEmail($request); //
-            }
+            $this->crearJson($sellado);
+            $this->crearQR($sellado);
+            $this->crearPdf($sellado, $dte);
+            $this->enviarEmailCliente($cliente, $sellado);
+            return $sellado;
+            
+        }
             return $dte;
         } 
         return errorResponse("Error al procesar DTE");
