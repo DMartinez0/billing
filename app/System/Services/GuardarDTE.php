@@ -19,6 +19,7 @@ trait GuardarDTE {
 
             'client_id'=> $cliente->id,
             'id_sistema'=> $request->id_sistema,
+            'email' => 0,
             'status' => 1
         ]);
 
@@ -57,6 +58,12 @@ trait GuardarDTE {
             'observaciones' => $dte['observaciones'], 
             'status' => 4,
         ]);
+    }
+
+    
+    public function guardarEmailEnviado($documentId)
+    {   
+        Document::where('id', $documentId)->update(['email' => 1,]);
     }
 
 
