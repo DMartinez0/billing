@@ -16,8 +16,9 @@ trait EnviarEmail {
                 Mail::to($request['receptor']['correo'])
                 ->send(new EnviarFacturaMailable($cliente, $request));
                 $this->guardarEmailEnviado($documentId);
+                $this->eliminarArchivos($request);          
             } catch (\Throwable $th) {
-                Log::alert("No se envio el Email");
+                Log::alert("No se envio el Email: " . $th->getMessage());
             }
         }
     }

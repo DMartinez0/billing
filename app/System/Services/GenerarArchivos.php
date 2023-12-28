@@ -15,7 +15,7 @@ trait GenerarArchivos {
             Storage::disk('local')
             ->put('documentos/'.$request['identificacion']['codigoGeneracion'] .'.json', json_encode($request));
         } catch (\Throwable $th) {
-            Log::alert("Error al crear archivo JSON");
+            Log::alert("Error al crear archivo JSON: " . $th->getMessage());
         }
     }
 
@@ -27,7 +27,7 @@ trait GenerarArchivos {
                         ->save(storage_path('/app/documentos/'.$request['identificacion']['codigoGeneracion'] .'.pdf'))
                         ->stream(storage_path('/app/documentos/'.$request['identificacion']['codigoGeneracion'] .'.pdf'));
         } catch (\Throwable $th) {
-            Log::alert("Error al crear archivo PDF");
+            Log::alert("Error al crear archivo PDF: " . $th->getMessage());
         }
     }
 
@@ -41,7 +41,23 @@ trait GenerarArchivos {
             QrCode::generate('https://admin.factura.gob.sv/consultaPublica?ambiente='.$request['identificacion']['ambiente'].'&codGen='.$request['identificacion']['codigoGeneracion'].'&fechaEmi='. $request['identificacion']['fecEmi'], 
             storage_path('/app/public/qr/'.$request['identificacion']['codigoGeneracion'] .'.svg'));
         } catch (\Throwable $th) {
-            Log::alert("Error al crear codigo QR");
+            Log::alert("Error al crear codigo QR: " . $th->getMessage());
+        }
+    }
+
+
+    public function eliminarArchivos($request)
+    {
+        try {
+            $codigoGeneracion = $request['identificacion']['codigoGeneracion'];
+            // Eliminar archivos usando el facade Storage
+            Storage::disk('local')->delete([
+                'documentos/' . $codigoGeneracion . '.json',
+                'documentos/' . $codigoGeneracion . '.pdf',
+                'public/qr/' . $codigoGeneracion . '.svg',
+            ]);
+        } catch (\Throwable $th) {
+            Log::alert("Error al Eliminar Archivos: " . $th->getMessage());
         }
     }
 
