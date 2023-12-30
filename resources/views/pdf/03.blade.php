@@ -199,31 +199,16 @@ table td.letras {
                 <div><span>Email</span> {{ $request['emisor']['correo'] }}</div>
                 <div><span>Establicimiento</span> {{ $request['emisor']['tipoEstablecimiento'] }}</div>
             </div>
-            <div id="company" class="clearfix">
-              @if ($request['receptor'])    
+            <div id="company" class="clearfix">  
               <div>RECEPTOR</div>
-                @if ($request['receptor']['nombre'])
-                <div><span>Nombre</span> {{ $request['receptor']['nombre'] }}</div>
-                @endif
-                @if ($request['receptor']['numDocumento'])
-                <div><span>Documento</span> {{ $request['receptor']['numDocumento'] }}</div>
-                @endif
-                @if ($request['receptor']['nrc'])
-                <div><span>NCR</span> {{ $request['receptor']['nrc'] }}</div>
-                @endif
-                @if ($request['receptor']['descActividad'])
-                <div><span>Actividad Economica</span> {{ $request['receptor']['descActividad'] }}</div>
-                @endif
-                @if ($request['receptor']['direccion'])
-                <div><span>Dirección</span> {{ $request['receptor']['direccion']['complemento'] }}, {{ nombreMunicipio($request['receptor']['direccion']['departamento'], $request['receptor']['direccion']['municipio']) }}, {{ nombreDepartamento($request['receptor']['direccion']['departamento']) }}</div>
-                @endif
-                @if ($request['receptor']['telefono'])
-                <div><span>Numero de telefono</span> {{ $request['receptor']['telefono'] }}</div>
-                @endif
-                @if ($request['receptor']['correo'])
-                <div><span>Email</span> {{ $request['receptor']['correo'] }}</div>
-                @endif
-              @endif
+              <div><span>Nombre</span> {{ $request['receptor']['nombre'] }}</div>
+              <div><span>NIT</span> {{ $request['receptor']['nit'] }}</div>
+              <div><span>NCR</span> {{ $request['receptor']['nrc'] }}</div>
+              <div><span>Actividad Economica</span> {{ $request['receptor']['descActividad'] }}</div>
+              <div><span>Dirección</span> {{ $request['receptor']['direccion']['complemento'] }}, {{ nombreMunicipio($request['receptor']['direccion']['departamento'], $request['receptor']['direccion']['municipio']) }}, {{ nombreDepartamento($request['receptor']['direccion']['departamento']) }}</div>
+              <div><span>Numero de telefono</span> {{ $request['receptor']['telefono'] }}</div>
+              <div><span>Email</span> {{ $request['receptor']['correo'] }}</div>
+              <div><span>Establicimiento</span> {{ $request['receptor']['tipoEstablecimiento'] }}</div>
             </div>
           </div>
 

@@ -1,0 +1,109 @@
+{
+  "nit": "02072103861029",
+  "activo": true,
+  "passwordPri": "ericknunez",
+  "id_sistema": "D45CD5DD-8831-46F7-85C0-2BBF378A9AEE",
+  "idEnvio": "2",
+  "dteJson": {
+    "identificacion": {
+      "version": 1,
+      "ambiente": "00",
+      "tipoDte": "03",
+      "numeroControl": "DTE-01-00000000-000000000000026",
+      "codigoGeneracion": "D45CD5DD-8831-46F7-9210-2DA2BC24254E",
+      "tipoModelo": 1,
+      "tipoOperacion": 1,
+      "tipoContingencia": null,
+      "motivoContin": null,
+      "fecEmi": "2023-12-28",
+      "horEmi": "03:18:57",
+      "tipoMoneda": "USD"
+    },
+    "documentoRelacionado": null,
+    "emisor": null,
+    "receptor": {
+        "nit": "02072103861028",
+        "nrc": "2800134",
+        "nombre": "JUAN PEREZ",
+        "codActividad": "62010",
+        "descActividad": "PROGRAMACION INFORMATICA",
+        "nombreComercial": null,
+        "direccion": {
+          "departamento": "02",
+          "municipio": "07",
+          "complemento": "11 CALLE PTE. POLIG. I, URB. LAS MAERICAS, # 9,"
+        },
+        "telefono": "60623821",
+        "correo": "juanperez@gmail.com"
+      },
+    "otrosDocumentos": null,
+    "ventaTercero": null,
+    "cuerpoDocumento": [
+        {
+            "numItem": 1,
+            "tipoItem": 2,
+            "cantidad": 1.0,
+            "codigo": null,
+            "uniMedida": 99,
+            "descripcion": "COM MEMBRESIA T. DEBITO TITULAR",
+            "precioUni": 0.85,
+            "montoDescu": 0.0,
+            "ventaNoSuj": 0.00,
+            "ventaExenta": 0.00,
+            "ventaGravada": 0.85,
+            "noGravado": 0.00,
+            "tributos": [
+              "20"
+            ],
+            "psv": 0.0
+          }
+    ],
+    "resumen": {
+        "totalNoSuj": 0.00,
+        "totalExenta": 0.00,
+        "totalGravada": 0.85,
+        "subTotalVentas": 0.85,
+        "descuNoSuj": 0.00,
+        "descuExenta": 0.00,
+        "descuGravada": 0.00,
+        "porcentajeDescuento": 0.00,
+        "totalDescu": 0.00,
+        "tributos": [
+          {
+            "codigo": "20",
+            "descripcion": "IMPUESTO AL VALOR AGREGADO 13%",
+            "valor": 0.11
+          }
+        ],
+        "subTotal": 0.85,
+        "ivaPerci1": 0.0,
+        "ivaRete1": 0.0,
+        "reteRenta": 0.00,
+        "montoTotalOperacion": 0.96,
+        "totalNoGravado": 0.00,
+        "totalPagar": 0.96,
+        "totalLetras": "CERO CON 96/100 US DOLARES",
+        "saldoFavor": 0.0,
+        "condicionOperacion": 1,
+        "pagos": [
+          {
+            "codigo": "01",
+            "montoPago": 0.96,
+            "referencia": null,
+            "plazo": null,
+            "periodo": null
+          }
+        ],
+        "numPagoElectronico": null
+      },
+    "extension": {
+      "nombEntrega": null,
+      "docuEntrega": null,
+      "nombRecibe": null,
+      "docuRecibe": null,
+      "observaciones": null,
+      "placaVehiculo": null
+    },
+    "apendice": null
+  }
+}

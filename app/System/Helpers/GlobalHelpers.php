@@ -135,5 +135,5 @@ Este archivo es de helpers globales para su uso solo debe llamarse la funcion
             }
          }
       }
-      return $idDepartamento."".$idMunicipio; // Municipio no encontrado
+      return null; // Municipio no encontrado
   }

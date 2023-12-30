@@ -19,11 +19,11 @@ trait GenerarArchivos {
         }
     }
 
-    public function crearPdf($request, $dte)
+    public function crearPdf($request)
     {
         try {
             $pdf = Pdf::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])
-                        ->loadView('pdf.01', compact('request', 'dte'))
+                        ->loadView('pdf.01', compact('request'))
                         ->save(storage_path('/app/documentos/'.$request['identificacion']['codigoGeneracion'] .'.pdf'))
                         ->stream(storage_path('/app/documentos/'.$request['identificacion']['codigoGeneracion'] .'.pdf'));
         } catch (\Throwable $th) {

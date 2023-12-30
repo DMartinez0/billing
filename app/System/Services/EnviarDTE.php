@@ -20,15 +20,16 @@ trait EnviarDTE {
             } else {
                 // Guardar la respuesta del MH (selloRecibido)
                 $firmado = Arr::add($request->dteJson, 'firmaElectronica', $firma);
-                $sellado = Arr::add($firmado, 'selloRecibido', $dte['selloRecibido']);
+                $sellado = Arr::add($firmado, 'responseMH', $dte);
                 $this->guardarProcesado($sellado, $documentId, $dte); //
                 // Enviar email al Cliente
                 $this->crearJson($sellado);
                 $this->crearQR($sellado);
-                $this->crearPdf($sellado, $dte);
-                $this->enviarEmailCliente($cliente, $sellado, $documentId);  
+                $this->crearPdf($sellado);
+                // $this->enviarEmailCliente($cliente, $sellado, $documentId);  
             }
-            return json_decode($dte, true);
+            return $dte;
+            // return json_decode($dte, true);
         } 
         return errorResponse("Error al procesar DTE");
     }
@@ -49,7 +50,7 @@ trait EnviarDTE {
        return Http::withHeaders([
                 'Accept' => 'application/json',
                 'Content-Type' => 'application/json',
-                'Authorization' => 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwMjA3MjEwMzg2MTAyOSIsImF1dGhvcml0aWVzIjpbIlVTRVIiLCJVU0VSX0FQSSIsIlVzdWFyaW8iXSwiaWF0IjoxNzAzNzEwNjA5LCJleHAiOjE3MDM3OTcwMDl9.EgR2j--aZco1Iu0tgPc3SaadzXIcQiRiRPps2ikqbhupq1PW-UlhY5jQRHWs4rIYR7ScUHn7jZXdtOlqzTfauQ'
+                'Authorization' => 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwMjA3MjEwMzg2MTAyOSIsImF1dGhvcml0aWVzIjpbIlVTRVIiLCJVU0VSX0FQSSIsIlVzdWFyaW8iXSwiaWF0IjoxNzAzODAxOTUzLCJleHAiOjE3MDM4ODgzNTN9.fMyx_axJcjw9bB9CnBxWT0o7bx0CbcJZnrtQtL_q300G2P0BJQhx848iQwgVkJngUfaVqlJyxs5R3ojs1HN9ig'
             ])
             ->post($this->getUrl($request), [
                 'ambiente' => $request->dteJson['identificacion']['ambiente'],
