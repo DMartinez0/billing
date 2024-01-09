@@ -6,32 +6,32 @@
   "idEnvio": "2",
   "dteJson": {
     "identificacion": {
-      "version": 1,
+      "version": 3,
       "ambiente": "00",
       "tipoDte": "03",
-      "numeroControl": "DTE-01-00000000-000000000000026",
-      "codigoGeneracion": "D45CD5DD-8831-46F7-9210-2DA2BC24254E",
+      "numeroControl": "DTE-03-00000000-000000000000001",
+      "codigoGeneracion": "D45CD5DD-8831-46F7-9210-2DA27724254E",
       "tipoModelo": 1,
       "tipoOperacion": 1,
       "tipoContingencia": null,
       "motivoContin": null,
-      "fecEmi": "2023-12-28",
-      "horEmi": "03:18:57",
+      "fecEmi": "2023-12-30",
+      "horEmi": "06:15:57",
       "tipoMoneda": "USD"
     },
     "documentoRelacionado": null,
     "emisor": null,
     "receptor": {
-        "nit": "02072103861028",
-        "nrc": "2800134",
-        "nombre": "JUAN PEREZ",
-        "codActividad": "62010",
-        "descActividad": "PROGRAMACION INFORMATICA",
-        "nombreComercial": null,
-        "direccion": {
-          "departamento": "02",
-          "municipio": "07",
-          "complemento": "11 CALLE PTE. POLIG. I, URB. LAS MAERICAS, # 9,"
+      "nit": "05110402951018",
+      "nrc": "830860",
+      "nombre": "BANCO PROMERICA, S.A.",
+      "codActividad": "64190",
+      "descActividad": "BANCOS",
+      "nombreComercial": "BANCO PROMERICA, S.A.",
+      "direccion": {
+        "departamento": "05",
+        "municipio": "01",
+        "complemento": "Edificio Promerica,La Gran Via Entre Carretera Panamericana y calle Chiltiupan Antiguo Cuscatlan"
         },
         "telefono": "60623821",
         "correo": "juanperez@gmail.com"
@@ -40,10 +40,12 @@
     "ventaTercero": null,
     "cuerpoDocumento": [
         {
+            "numeroDocumento": null,
             "numItem": 1,
             "tipoItem": 2,
             "cantidad": 1.0,
             "codigo": null,
+            "codTributo": null,
             "uniMedida": 99,
             "descripcion": "COM MEMBRESIA T. DEBITO TITULAR",
             "precioUni": 0.85,

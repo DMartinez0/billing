@@ -23,7 +23,7 @@ trait GenerarArchivos {
     {
         try {
             $pdf = Pdf::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])
-                        ->loadView('pdf.01', compact('request'))
+                        ->loadView('pdf.'.$request['identificacion']['tipoDte'], compact('request'))
                         ->save(storage_path('/app/documentos/'.$request['identificacion']['codigoGeneracion'] .'.pdf'))
                         ->stream(storage_path('/app/documentos/'.$request['identificacion']['codigoGeneracion'] .'.pdf'));
         } catch (\Throwable $th) {

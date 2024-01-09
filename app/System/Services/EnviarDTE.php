@@ -11,8 +11,8 @@ trait EnviarDTE {
 
     public function procesarDTE($request, $documentId, $firma, $cliente)
     {
-        // $dte = $this->dte($request, $firma);
-        $dte = $this->respuestaProcesado();
+        $dte = $this->dte($request, $firma);
+        // $dte = $this->respuestaProcesado();
         if ($dte) {
             if ($dte['estado'] == "RECHAZADO") {
                 // Guardar los dados de rechazo
@@ -26,10 +26,10 @@ trait EnviarDTE {
                 $this->crearJson($sellado);
                 $this->crearQR($sellado);
                 $this->crearPdf($sellado);
-                // $this->enviarEmailCliente($cliente, $sellado, $documentId);  
+                $this->enviarEmailCliente($cliente, $sellado, $documentId);  
             }
-            return $dte;
-            // return json_decode($dte, true);
+            // return $dte;
+            return json_decode($dte, true);
         } 
         return errorResponse("Error al procesar DTE");
     }
@@ -50,7 +50,7 @@ trait EnviarDTE {
        return Http::withHeaders([
                 'Accept' => 'application/json',
                 'Content-Type' => 'application/json',
-                'Authorization' => 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwMjA3MjEwMzg2MTAyOSIsImF1dGhvcml0aWVzIjpbIlVTRVIiLCJVU0VSX0FQSSIsIlVzdWFyaW8iXSwiaWF0IjoxNzAzODAxOTUzLCJleHAiOjE3MDM4ODgzNTN9.fMyx_axJcjw9bB9CnBxWT0o7bx0CbcJZnrtQtL_q300G2P0BJQhx848iQwgVkJngUfaVqlJyxs5R3ojs1HN9ig'
+                'Authorization' => 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwMjA3MjEwMzg2MTAyOSIsImF1dGhvcml0aWVzIjpbIlVTRVIiLCJVU0VSX0FQSSIsIlVzdWFyaW8iXSwiaWF0IjoxNzAzOTM4NjAxLCJleHAiOjE3MDQwMjUwMDF9.6OfT3L0jnAe23zehN8psJi9hL20g3Dk-PuXZA0x0TY3rBmluWVHgE9_8ObUYA35UmIQ9CCLSDCjJznzWEcalfg'
             ])
             ->post($this->getUrl($request), [
                 'ambiente' => $request->dteJson['identificacion']['ambiente'],

@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Documento Tributario Electrónico - Factura</title>
+    <title>Comprobante de Credito Fiscal</title>
     {{-- <link rel="stylesheet" href="{{ asset('css/style_invoice.css')."?v=".rand(1,1000) }}" media="all"  /> --}}
     <style>
 .clearfix:after {
@@ -42,8 +42,8 @@ header {
 
 #logo img {
   width: 125px;
-  padding-left: 60px;
-  padding-right: 60px;
+  padding-left: 110px;
+  padding-right: 110px;
 }
 
 h1 {
@@ -173,11 +173,11 @@ table td.letras {
     </style>
   </head>
   <body>
-    <h1>Documento Tributario Electrónico - Factura</h1>
+    <h1>COMPROBANTE DE CREDITO FISCAL</h1>
     <header class="clearfix">
       
       <div id="logo">
-        <img src="http://billing.test/images/invoice/logo.png" width="150">
+        <img src="http://billing.test/images/invoice/logo.jpg" width="150">
 
         <img src="{{ asset('storage/qr/'.$request['identificacion']['codigoGeneracion'].'.svg') }}" width="150">
         
@@ -208,7 +208,6 @@ table td.letras {
               <div><span>Dirección</span> {{ $request['receptor']['direccion']['complemento'] }}, {{ nombreMunicipio($request['receptor']['direccion']['departamento'], $request['receptor']['direccion']['municipio']) }}, {{ nombreDepartamento($request['receptor']['direccion']['departamento']) }}</div>
               <div><span>Numero de telefono</span> {{ $request['receptor']['telefono'] }}</div>
               <div><span>Email</span> {{ $request['receptor']['correo'] }}</div>
-              <div><span>Establicimiento</span> {{ $request['receptor']['tipoEstablecimiento'] }}</div>
             </div>
           </div>
 
@@ -218,12 +217,14 @@ table td.letras {
       <table>
         <thead>
           <tr>
-            <th class="service">CANT</th>
-            <th class="desc">DESCRIPCION</th>
-            <th>CODIGO</th>
-            <th>PRECIO</th>
-            <th>DESC. POR ITEM</th>
-            <th>TOTAL</th>
+            <th class="service">Cant</th>
+            <th class="desc">Descripción</th>
+            <th>Codigo</th>
+            <th>Precio</th>
+            <th>Desc. por item</th>
+            <th>No sujetas</th>
+            <th>Exentas</th>
+            <th>Gravadas</th>
           </tr>
         </thead>
         <tbody>
@@ -234,27 +235,37 @@ table td.letras {
             <td>{{ $producto['codigo'] }}</td>
             <td>{{ $producto['precioUni'] }}</td>
             <td>{{ $producto['montoDescu'] }}</td>
+            <td>{{ $producto['montoDescu'] }}</td>
+            <td>{{ $producto['montoDescu'] }}</td>
             <td class="total">{{ $producto['ventaGravada'] }}</td>
           </tr>
           @endforeach
           <tr>
-            <td colspan="5">Suma total de operaciones</td>
+            <td colspan="7">Subtotal Ventas</td>
             <td class="total">${{$request['resumen']['subTotalVentas']}}</td>
           </tr>
           <tr>
-            <td colspan="5">Monto total de descuentos</td>
-            <td class="total">${{$request['resumen']['totalDescu']}}</td>
+            <td colspan="7">IMPUESTO AL VALOR AGREGADO 13%</td>
+            <td class="total">${{$request['resumen']['tributos'][0]['valor']}}</td>
           </tr>
           <tr>
-            <td colspan="5">Monto total de Operaciones</td>
+            <td colspan="7">Subtotal</td>
+            <td class="total">${{$request['resumen']['subTotal']}}</td>
+          </tr>
+          <tr>
+            <td colspan="7">Monto total de Operaciones</td>
             <td class="total">${{$request['resumen']['montoTotalOperacion']}}</td>
           </tr>
           <tr>
-            <td colspan="5" class="grand total">TOTAL A PAGAR</td>
+            <td colspan="7">Total no gravado</td>
+            <td class="total">${{$request['resumen']['totalNoGravado']}}</td>
+          </tr>
+          <tr>
+            <td colspan="7" class="grand total">TOTAL A PAGAR</td>
             <td class="grand total">${{$request['resumen']['pagos'][0]['montoPago']}}</td>
           </tr>
           <tr>
-            <td colspan="6" class="letras">TOTAL EN LETRAS: {{$request['resumen']['totalLetras']}}</td>
+            <td colspan="8" class="letras">TOTAL EN LETRAS: {{$request['resumen']['totalLetras']}}</td>
           </tr>
 
         </tbody>

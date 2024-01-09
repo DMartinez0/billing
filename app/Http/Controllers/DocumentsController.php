@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\DocumentsRequest;
 use App\Models\Client;
+use App\Models\Document;
 use App\System\Services\EnviarDTE;
 use App\System\Services\Firmador;
 use App\System\Services\GuardarDTE;
@@ -40,4 +41,20 @@ class DocumentsController extends Controller
             return errorResponse("Error al firmar el documento");
         }
     }
+
+    public function show($codigo, $idSistema)
+    {
+        $documento = Document::where('codigo_generacion', $codigo)
+                             ->where('id_sistema', $idSistema)
+                             ->first();
+        if(!$documento) return errorResponse("No se encuentra el documento");
+        return response()->json([
+                                'documento_json' => json_decode($documento->documento_json, true), 
+                                'documento_sellado' => json_decode($documento->documento_sellado, true), 
+                                'status' => $documento->status, 
+                                'email' => $documento->email, 
+                                'type' => 'successful'
+        ], 200);
+    }
+
 }
