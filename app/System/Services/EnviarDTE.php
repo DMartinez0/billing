@@ -22,7 +22,6 @@ trait EnviarDTE {
                 $firmado = Arr::add($request->dteJson, 'firmaElectronica', $firma);
                 $sellado = Arr::add($firmado, 'responseMH', $dte);
                 $this->guardarProcesado($sellado, $documentId, $dte); //
-                // Enviar email al Cliente
                 $this->crearJson($sellado);
                 $this->crearQR($sellado);
                 $this->crearPdf($sellado);
@@ -50,7 +49,7 @@ trait EnviarDTE {
        return Http::withHeaders([
                 'Accept' => 'application/json',
                 'Content-Type' => 'application/json',
-                'Authorization' => 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwMjA3MjEwMzg2MTAyOSIsImF1dGhvcml0aWVzIjpbIlVTRVIiLCJVU0VSX0FQSSIsIlVzdWFyaW8iXSwiaWF0IjoxNzAzOTM4NjAxLCJleHAiOjE3MDQwMjUwMDF9.6OfT3L0jnAe23zehN8psJi9hL20g3Dk-PuXZA0x0TY3rBmluWVHgE9_8ObUYA35UmIQ9CCLSDCjJznzWEcalfg'
+                'Authorization' => 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwMjA3MjEwMzg2MTAyOSIsImF1dGhvcml0aWVzIjpbIlVTRVIiLCJVU0VSX0FQSSIsIlVzdWFyaW8iXSwiaWF0IjoxNzA1MDkyMzk1LCJleHAiOjE3MDUxNzg3OTV9.TTFXzr7_CZjw7L8VlIDAHXGLRxmOfOxHaMfiX27OFaTF9SFc3nahjXN9TLbz5uY7ZH_B6Ns3-rb-abBenTer0g'
             ])
             ->post($this->getUrl($request), [
                 'ambiente' => $request->dteJson['identificacion']['ambiente'],

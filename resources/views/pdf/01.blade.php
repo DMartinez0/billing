@@ -177,7 +177,7 @@ table td.letras {
     <header class="clearfix">
       
       <div id="logo">
-        <img src="http://billing.test/images/invoice/logo.png" width="150">
+        <img src="http://billing.test:8080/images/invoice/logo.png" width="150">
 
         <img src="{{ asset('storage/qr/'.$request['identificacion']['codigoGeneracion'].'.svg') }}" width="150">
         
