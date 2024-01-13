@@ -22,7 +22,7 @@ trait EnviarDTE {
             } else {
                 // Guardar la respuesta del MH (selloRecibido)
                 $firmado = Arr::add($request->dteJson, 'firmaElectronica', $firma);
-                $sellado = Arr::add($firmado, 'responseMH', $dte);
+                $sellado = Arr::add($firmado, 'responseMH', json_decode($dte, true));
                 $this->guardarProcesado($sellado, $documentId, $dte); //
                 $this->crearJson($sellado);
                 $this->crearQR($sellado);
