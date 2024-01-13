@@ -1,6 +1,7 @@
 <?php
 namespace App\System\Services;
 
+use App\Models\Client;
 use App\Models\Document;
 use Illuminate\Support\Arr;
 
@@ -67,6 +68,10 @@ trait GuardarDTE {
     }
 
 
+    public function guardarToken($cliente, $token)
+    {
+        Client::where('id', $cliente->id)->update(['token' => $token, 'token_updated_at' => now()]);
+    }
 
 
 

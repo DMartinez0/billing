@@ -36,6 +36,9 @@ return new class extends Migration
             $table->foreign('user_id')
                             ->references('id')
                             ->on('users');
+            $table->text('pwd')->nullable()->comment('pwd API MH'); 
+            $table->text('token')->nullable()->comment('Token de autenticacion'); 
+            $table->timestamp('token_updated_at')->nullable()->comment('Ultima actualizacion del token'); 
             $table->integer('status')->comment('1: activo, 2: Suspendido, 0: Inactivo'); 
             $table->timestamps();
         });

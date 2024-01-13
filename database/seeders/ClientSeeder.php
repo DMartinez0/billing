@@ -30,6 +30,7 @@ class ClientSeeder extends Seeder
             'cod_estable' => null,
             'cod_punto_venta_mh' => null,
             'cod_punto_venta' => null,
+            'pwd' => "Hibrido007-+",
             'user_id' => 1,
             'status' => 1,
         ]);

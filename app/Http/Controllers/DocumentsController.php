@@ -43,6 +43,7 @@ class DocumentsController extends Controller
         }
     }
 
+    
     public function show($codigo, $idSistema)
     {
         $documento = Document::where('codigo_generacion', $codigo)

@@ -2,8 +2,10 @@
 namespace App\System\Services;
 
 use App\System\Mocks\DTE;
+use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 trait EnviarDTE {
 
@@ -11,7 +13,7 @@ trait EnviarDTE {
 
     public function procesarDTE($request, $documentId, $firma, $cliente)
     {
-        $dte = $this->dte($request, $firma);
+        $dte = $this->dte($request, $firma, $cliente);
         // $dte = $this->respuestaProcesado();
         if ($dte) {
             if ($dte['estado'] == "RECHAZADO") {
@@ -42,16 +44,16 @@ trait EnviarDTE {
         *@codigoGeneracion "D45CD5DD-8831-46F7-9510-2BBF31259AEE",
         *@documento 
          */
-    public function dte($request, $firma)
+    public function dte($request, $firma, $cliente)
     {
        
        
        return Http::withHeaders([
                 'Accept' => 'application/json',
                 'Content-Type' => 'application/json',
-                'Authorization' => 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwMjA3MjEwMzg2MTAyOSIsImF1dGhvcml0aWVzIjpbIlVTRVIiLCJVU0VSX0FQSSIsIlVzdWFyaW8iXSwiaWF0IjoxNzA1MDkyMzk1LCJleHAiOjE3MDUxNzg3OTV9.TTFXzr7_CZjw7L8VlIDAHXGLRxmOfOxHaMfiX27OFaTF9SFc3nahjXN9TLbz5uY7ZH_B6Ns3-rb-abBenTer0g'
+                'Authorization' => $this->getToken($request, $cliente)
             ])
-            ->post($this->getUrl($request), [
+            ->post($this->getUrl($request) . "fesv/recepciondte", [
                 'ambiente' => $request->dteJson['identificacion']['ambiente'],
                 'idEnvio' => $request->idEnvio,
                 'version' => $request->dteJson['identificacion']['version'],
@@ -64,11 +66,53 @@ trait EnviarDTE {
     private function getUrl($request)
     {
         if ($request->dteJson['identificacion']['ambiente'] == "01") {
-           return "https://api.dtes.mh.gob.sv/fesv/recepciondte";
+           return "https://api.dtes.mh.gob.sv/";
         } else {
-            return "https://apitest.dtes.mh.gob.sv/fesv/recepciondte";
+            return "https://apitest.dtes.mh.gob.sv/";
         }
     }
+
+
+    
+    public function getToken($request, $cliente)
+    {
+        if ($cliente->token_updated_at) {
+            $fechaRegistro = Carbon::parse($cliente->token_updated_at);
+            $fechaActual = Carbon::now();
+            $diferenciaHoras = $fechaActual->diffInHours($fechaRegistro);
+            if ($diferenciaHoras >= 24) { // 24 horas
+                return $this->tokenMH($request, $cliente);
+            } else {
+                return $cliente->token;
+            } 
+        }
+        return $this->tokenMH($request, $cliente);
+
+    }
+
+
+    public function tokenMH($request, $cliente)
+    {
+
+            $token = Http::withHeaders([
+                'Accept' => 'application/json',
+                'Content-Type' => 'application/x-www-form-urlencoded',
+            ])
+            ->asForm()
+            ->post($this->getUrl($request) . "seguridad/auth", [
+                'user' => $request->nit,
+                'pwd' => $cliente->pwd,
+            ]);
+
+
+        if ($token['status'] == "OK") {
+            $this->guardarToken($cliente, $token['body']['token']);
+            return $token['body']['token'];
+        }
+        return null;
+    }
+
+
 
 
 }
