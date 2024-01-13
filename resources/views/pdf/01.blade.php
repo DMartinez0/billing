@@ -177,7 +177,7 @@ table td.letras {
     <header class="clearfix">
       
       <div id="logo">
-        <img src="http://billing.test:8080/images/invoice/logo.png" width="150">
+        <img src="https://api-factura-electronica.hibridosv.com/images/invoice/logo.png" width="150">
 
         <img src="{{ asset('storage/qr/'.$request['identificacion']['codigoGeneracion'].'.svg') }}" width="150">
         
