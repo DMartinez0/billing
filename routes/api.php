@@ -25,7 +25,7 @@ Route::get('/', function () {
 
 Route::controller(DocumentsController::class)->group(function () {
     // Route::get('documents', 'index');
-    Route::get('documents/{codigo}', 'show');
+    Route::get('documents/{codigo}/{idSistema}', 'show');
     Route::post('documents', 'store');
     // Route::delete('documents/{id}', 'destroy');
 });
