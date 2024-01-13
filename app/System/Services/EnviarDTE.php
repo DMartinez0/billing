@@ -13,24 +13,24 @@ trait EnviarDTE {
 
     public function procesarDTE($request, $documentId, $firma, $cliente)
     {
-        $dte = $this->dte($request, $firma, $cliente);
-        // $dte = $this->respuestaProcesado();
+        // $dte = $this->dte($request, $firma, $cliente);
+        $dte = $this->respuestaProcesado();
         if ($dte) {
             if ($dte['estado'] == "RECHAZADO") {
                 // Guardar los dados de rechazo
                 $this->guardarRechazado($documentId, $dte);
             } else {
                 // Guardar la respuesta del MH (selloRecibido)
-                $firmado = Arr::add($request->dteJson, 'firmaElectronica', $firma);
-                $sellado = Arr::add($firmado, 'responseMH', $dte);
+                $firmado = Arr::set($request->dteJson, 'firmaElectronica', $firma);
+                $sellado = Arr::set($firmado, 'responseMH', $dte);
                 $this->guardarProcesado($sellado, $documentId, $dte); //
                 $this->crearJson($sellado);
                 $this->crearQR($sellado);
                 $this->crearPdf($sellado);
                 $this->enviarEmailCliente($cliente, $sellado, $documentId);  
             }
-            // return $dte;
-            return json_decode($dte, true);
+            return $dte;
+            // return json_decode($dte, true);
         } 
         return errorResponse("Error al procesar DTE");
     }

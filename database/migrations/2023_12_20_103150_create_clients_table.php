@@ -37,8 +37,10 @@ return new class extends Migration
                             ->references('id')
                             ->on('users');
             $table->text('pwd')->nullable()->comment('pwd API MH'); 
+            $table->text('password_pri')->nullable()->comment('clave privada'); 
             $table->text('token')->nullable()->comment('Token de autenticacion'); 
             $table->timestamp('token_updated_at')->nullable()->comment('Ultima actualizacion del token'); 
+            $table->string('ambiente')->default("00")->comment('00: Pruebas, 01: Produccion'); 
             $table->integer('status')->comment('1: activo, 2: Suspendido, 0: Inactivo'); 
             $table->timestamps();
         });

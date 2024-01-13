@@ -6,7 +6,7 @@ use Illuminate\Support\Arr;
 trait ModificarJson {
 
 
-    public function agregarEmisor($request, $cliente)
+    public function agregarValoresIniciales($request, $cliente)
     {
         $emisor = array();
         $emisor["nit"] = $cliente->nit;
@@ -27,6 +27,10 @@ trait ModificarJson {
         $emisor["codPuntoVenta"] = $cliente->cod_punto_venta;
 
         $requestArray = $request->all();
+        Arr::set($requestArray, 'nit', $cliente->nit);
+        Arr::set($requestArray, 'activo', true);
+        Arr::set($requestArray, 'passwordPri', $cliente->password_pri);
+        Arr::set($requestArray, 'dteJson.identificacion.ambiente', $cliente->ambiente);
         Arr::set($requestArray, 'dteJson.emisor', $emisor);
         $request = (object) $requestArray;
         return $request;

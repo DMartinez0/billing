@@ -22,8 +22,6 @@ class DocumentsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nit' => 'required|numeric',
-            'passwordPri' => 'required|string|max:200',
             'dteJson' => 'required',
             'id_sistema' => 'required|uuid',
         ];

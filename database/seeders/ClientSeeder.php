@@ -31,7 +31,9 @@ class ClientSeeder extends Seeder
             'cod_punto_venta_mh' => null,
             'cod_punto_venta' => null,
             'pwd' => "Hibrido007-+",
+            'password_pri' => "ericknunez",
             'user_id' => 1,
+            'ambiente' => "00",
             'status' => 1,
         ]);
     }

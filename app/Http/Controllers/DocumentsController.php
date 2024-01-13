@@ -26,10 +26,10 @@ class DocumentsController extends Controller
     {
         // Filtrar campos de validacion (Se realiza en DocumentsRequest)
         // Obtener datos del cliente
-        $cliente = Client::where('nit', $request->nit)->first();
+        $cliente = Client::find($request->id_sistema);
         if(!$cliente) return errorResponse("No se encuentra el cliente");
-        // Agregar el emsor desde la base de datos
-        $request = $this->agregarEmisor($request, $cliente);
+        // Agregar el emisor y clave desde la base de datos
+        $request = $this->agregarValoresIniciales($request, $cliente);
         // Guardar documento sin firmar y obtener el id
         $documentId = $this->guardarDocument($request, $cliente); ///
         // Firmar documento
@@ -43,7 +43,7 @@ class DocumentsController extends Controller
         }
     }
 
-    
+
     public function show($codigo, $idSistema)
     {
         $documento = Document::where('codigo_generacion', $codigo)
