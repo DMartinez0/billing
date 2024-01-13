@@ -44,11 +44,9 @@ class DocumentsController extends Controller
     }
 
 
-    public function show($codigo, $idSistema)
+    public function show($codigo)
     {
-        $documento = Document::where('codigo_generacion', $codigo)
-                             ->where('id_sistema', $idSistema)
-                             ->first();
+        $documento = Document::where('codigo_generacion', $codigo)->first();
         if(!$documento) return errorResponse("No se encuentra el documento");
         return response()->json([
                                 'documento_json' => json_decode($documento->documento_json, true), 
