@@ -14,12 +14,17 @@ class DocumentsController extends Controller
 {
 
     use Firmador, GuardarDTE, EnviarDTE, ModificarJson;
+
+    public function index($clientId){
+        return Document::where('client_id', $clientId)->paginate(25);
+    }
+
     /*
     * @ Guarda, Firma, Envia y valida el documento
     * @nit
     * @passwordPri
     * @dteJson
-    * @id_sistema
+    * @id_sistema es igual a client_id o id de tabla cliente
     * @idEnvio // campo a discresion (uuid de factura)(NO SE USARA)
     */
     public function store(DocumentsRequest $request)
@@ -44,10 +49,10 @@ class DocumentsController extends Controller
     }
 
 
-    public function show($codigo, $idSistema)
+    public function show($codigo, $clientId)
     {
         $documento = Document::where('codigo_generacion', $codigo)
-                             ->where('id_sistema', $idSistema)
+                             ->where('client_id', $clientId)
                              ->first();
         if(!$documento) return errorResponse("No se encuentra el documento");
         return response()->json([

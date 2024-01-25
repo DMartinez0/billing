@@ -19,7 +19,6 @@ trait GuardarDTE {
             'documento_json' => json_encode($request->dteJson),
 
             'client_id'=> $cliente->id,
-            'id_sistema'=> $request->id_sistema,
             'email' => 0,
             'status' => 1
         ]);

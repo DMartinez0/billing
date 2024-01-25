@@ -38,8 +38,6 @@ return new class extends Migration
                             ->references('id')
                             ->on('clients');
 
-            $table->uuid('id_sistema')->nullable()->comment('Unico uuid del sistema que emite');
-    
             $table->integer('email')->nullable()->comment('1: Enviado, 0: Firmado'); 
             $table->integer('status')->nullable()->comment('1: Recibido, 2: Firmado, 3: Rechazado, 4: Procesado'); 
 
