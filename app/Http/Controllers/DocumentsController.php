@@ -15,9 +15,11 @@ class DocumentsController extends Controller
 
     use Firmador, GuardarDTE, EnviarDTE, ModificarJson;
 
+
     public function index($clientId){
         return Document::where('client_id', $clientId)->paginate(25);
     }
+
 
     /*
     * @ Guarda, Firma, Envia y valida el documento
@@ -48,6 +50,7 @@ class DocumentsController extends Controller
         }
     }
 
+    
 
     public function show($codigo, $clientId)
     {
@@ -60,6 +63,8 @@ class DocumentsController extends Controller
                                 'documento_sellado' => json_decode($documento->documento_sellado, true), 
                                 'status' => $documento->status, 
                                 'email' => $documento->email, 
+                                'descripcion' => $documento->descripcion_msg, 
+                                'observaciones' => $documento->observaciones, 
                                 'type' => 'successful'
         ], 200);
     }
