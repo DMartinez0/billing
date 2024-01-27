@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DocumentsController;
+use App\Http\Controllers\RemoteUrlController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 
@@ -20,4 +21,9 @@ Route::controller(DocumentsController::class)->group(function () {
     Route::get('documents/{codigo}/{clientId}', 'show');
     Route::post('documents', 'store');
     // Route::delete('documents/{id}', 'destroy');
+});
+
+Route::controller(RemoteUrlController::class)->group(function () {
+    Route::post('remote', 'index');
+    Route::post('documents', 'store');
 });
