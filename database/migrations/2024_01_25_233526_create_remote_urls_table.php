@@ -15,6 +15,8 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('email')->unique();
             $table->string('url')->comment("url del sistema al que corresponde el email");
+            $table->string('client_id')->nullable();
+            $table->string('client_secret')->nullable();
             $table->timestamps();
         });
     }

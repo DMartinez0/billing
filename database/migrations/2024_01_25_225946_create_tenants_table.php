@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('username');
             $table->text('description')->nullable()->comment("Descripcion del sistema");
             $table->integer('type')->comment('1: Permanent, 2: Monthy');
+            $table->integer('system')->nullable()->comment('Tipo de sistema, productos, restaurante, latam, etc');
             $table->timestamps();
         });
     }
