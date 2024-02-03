@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name')->comment("nombre del cliente");
             $table->string('domain')->unique();
             $table->string('hostname');
-            $table->string('database')->unique();
+            $table->string('database');
             $table->string('username');
             $table->text('description')->nullable()->comment("Descripcion del sistema");
             $table->integer('type')->comment('1: Permanent, 2: Monthy');

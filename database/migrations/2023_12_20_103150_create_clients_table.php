@@ -32,7 +32,7 @@ return new class extends Migration
             $table->string('cod_punto_venta')->nullable();
 
 
-            $table->unsignedBigInteger('user_id')->nullable();
+            $table->uuid('user_id')->nullable();
             $table->foreign('user_id')
                             ->references('id')
                             ->on('users');

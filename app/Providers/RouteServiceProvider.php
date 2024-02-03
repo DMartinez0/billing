@@ -34,12 +34,7 @@ class RouteServiceProvider extends ServiceProvider
             $api = ['api'];
             $web = ['web'];
 
-            if (config('multitenancy.enabled')) {
-                array_push($api, 'tenant.api');
-                array_push($web, 'tenant.web');
-            }
-            
-            
+        
             Route::middleware($api)
                 ->prefix('api')
                 ->group(base_path('routes/api.php'));

@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('remote_urls', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('email')->unique();
+            $table->string('email');
             $table->string('url')->comment("url del sistema al que corresponde el email");
-            $table->string('client_id')->nullable();
-            $table->string('client_secret')->nullable();
+            $table->string('client_id');
+            $table->string('client_secret');
             $table->timestamps();
         });
     }

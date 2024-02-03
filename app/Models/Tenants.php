@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tenants extends Model
 {
-    use HasFactory, HasUuids;
+    use HasFactory;
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
 }

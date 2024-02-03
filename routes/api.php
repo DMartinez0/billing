@@ -24,6 +24,6 @@ Route::controller(DocumentsController::class)->group(function () {
 });
 
 Route::controller(RemoteUrlController::class)->group(function () {
-    Route::post('remote', 'index');
+    Route::post('oauth', 'oauth');
     Route::post('documents', 'store');
 });
