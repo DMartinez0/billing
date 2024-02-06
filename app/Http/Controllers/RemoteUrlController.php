@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\RemoteUrlResource;
 use App\Models\RemoteUrl;
+use App\Models\Tenants;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Http;
+
+use Illuminate\Support\Str;
 
 class RemoteUrlController extends Controller
 {
@@ -20,7 +20,8 @@ class RemoteUrlController extends Controller
             return response()->json([
                 'url' => $url->url, 
                 'id' => $url->client_id, 
-                'hash' => $url->client_secret, 
+                'hash' => $url->client_secret,
+                'system' => Tenants::where('domain', Str::of($url->url)->afterLast('//'))->first()->id,
             ], 200);
         }
 

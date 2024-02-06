@@ -29,8 +29,8 @@ trait EnviarDTE {
                 $this->crearPdf($sellado);
                 $this->enviarEmailCliente($cliente, $sellado, $documentId);  
             }
-            // return $dte;
             return json_decode($dte, true);
+            // return $dte;
         } 
         return errorResponse("Error al procesar DTE");
     }
