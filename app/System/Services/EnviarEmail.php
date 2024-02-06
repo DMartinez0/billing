@@ -11,7 +11,7 @@ trait EnviarEmail {
 
     public function enviarEmailCliente($cliente, $request, $documentId)
     {
-        if ($request['receptor']['correo']) {
+        if (isset($request['receptor']) && isset($request['receptor']['correo'])) {
             try {
                 Mail::to($request['receptor']['correo'])
                 ->send(new EnviarFacturaMailable($cliente, $request));
