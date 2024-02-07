@@ -5,15 +5,17 @@ namespace App\Http\Controllers;
 use App\Http\Requests\DocumentsRequest;
 use App\Models\Client;
 use App\Models\Document;
+use App\Models\User;
 use App\System\Services\EnviarDTE;
 use App\System\Services\Firmador;
+use App\System\Services\GenerarArchivos;
 use App\System\Services\GuardarDTE;
 use App\System\Services\ModificarJson;
 
 class DocumentsController extends Controller
 {
 
-    use Firmador, GuardarDTE, EnviarDTE, ModificarJson;
+    use Firmador, GuardarDTE, EnviarDTE, ModificarJson, GenerarArchivos;
 
 
     public function index($clientId){
@@ -68,5 +70,18 @@ class DocumentsController extends Controller
                                 'type' => 'successful'
         ], 200);
     }
+
+
+    public function download($codigo, $clientId)
+    {
+        $sellado = Document::where('codigo_generacion', $codigo)
+                             ->where('client_id', $clientId)
+                             ->first();
+
+        if(!$sellado) return errorResponse("No se encuentra el documento");
+        return $this->downloadPdf(json_decode($sellado->documento_sellado, true));
+    }
+
+
 
 }

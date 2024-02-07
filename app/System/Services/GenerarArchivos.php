@@ -61,4 +61,23 @@ trait GenerarArchivos {
         }
     }
 
+
+
+    /*
+    Descargar PDF, este no se guarda en el storage del server
+    */
+    public function downloadPdf($request)
+    {
+        try {
+            $this->crearQR($request);
+            $pdf = Pdf::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])
+                        ->loadView('pdf.'.$request['identificacion']['tipoDte'], compact('request'));
+            $response =  $pdf->download($request['identificacion']['codigoGeneracion'] .'.pdf');
+            $this->eliminarArchivos($request);
+            return $response;
+        } catch (\Throwable $th) {
+            Log::alert("Error al crear archivo PDF: " . $th->getMessage());
+        }
+    }
+
 }

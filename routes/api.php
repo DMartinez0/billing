@@ -20,6 +20,7 @@ Route::controller(DocumentsController::class)->group(function () {
     Route::get('documents/{clientId}', 'index');
     Route::get('documents/{codigo}/{clientId}', 'show');
     Route::post('documents', 'store');
+    Route::get('documents/download/{codigo}/{clientId}', 'download'); // codigo de generacion y cliente
     // Route::delete('documents/{id}', 'destroy');
 });
 
