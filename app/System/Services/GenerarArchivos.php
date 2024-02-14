@@ -23,7 +23,7 @@ trait GenerarArchivos {
     {
         try {
             $pdf = Pdf::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])
-                        ->loadView('pdf.'.$request['identificacion']['tipoDte'], compact('request'))
+                        ->loadView(formatView('pdf', $request['emisor']['nit'], $request['identificacion']['tipoDte']), compact('request'))
                         ->save(storage_path('/app/documentos/'.$request['identificacion']['codigoGeneracion'] .'.pdf'))
                         ->stream(storage_path('/app/documentos/'.$request['identificacion']['codigoGeneracion'] .'.pdf'));
         } catch (\Throwable $th) {
@@ -71,7 +71,7 @@ trait GenerarArchivos {
         try {
             $this->crearQR($request);
             $pdf = Pdf::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])
-                        ->loadView('pdf.'.$request['identificacion']['tipoDte'], compact('request'));
+                        ->loadView(formatView('pdf', $request['emisor']['nit'], $request['identificacion']['tipoDte']), compact('request'));
             $response =  $pdf->download($request['identificacion']['codigoGeneracion'] .'.pdf');
             $this->eliminarArchivos($request);
             return $response;

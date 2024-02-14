@@ -45,7 +45,7 @@ class EnviarFacturaMailable extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.factura',
+            view: formatView('emails', $this->cliente->nit, 'factura'),
         );
     }
 
@@ -56,14 +56,13 @@ class EnviarFacturaMailable extends Mailable
      */
     public function attachments(): array
     {
+        $codigo = $this->request['identificacion']['codigoGeneracion'];
         return [
-            Attachment::fromPath(storage_path('/app/documentos/'.$this->request['identificacion']['codigoGeneracion'] .'.pdf'))
-            ->as($this->request['identificacion']['codigoGeneracion'] .'.pdf')
-            ->withMime('application/pdf'),
+            Attachment::fromPath(storage_path('/app/documentos/'. $codigo .'.pdf'))
+                                ->as($codigo .'.pdf')->withMime('application/pdf'),
             
-            Attachment::fromPath(storage_path('/app/documentos/'.$this->request['identificacion']['codigoGeneracion'] .'.json'))
-            ->as($this->request['identificacion']['codigoGeneracion'] .'.json')
-            ->withMime('application/json'),
+            Attachment::fromPath(storage_path('/app/documentos/'. $codigo .'.json'))
+                                ->as($codigo .'.json')->withMime('application/json'),
         ];
     }
 }

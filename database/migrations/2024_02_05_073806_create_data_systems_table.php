@@ -24,12 +24,15 @@ return new class extends Migration
             $table->string('document');
             $table->uuid('client_id')->nullable();
             $table->foreign('client_id')
-                            ->references('id')
-                            ->on('clients');
+                ->references('id')
+                ->on('clients');
             $table->unsignedBigInteger('tenant_id')->nullable();
             $table->foreign('tenant_id')
-                            ->references('id')
-                            ->on('tenants');
+                ->references('id')
+                ->on('tenants');
+            $table->string('url');
+            $table->string('logo')->nullable();
+            $table->integer('theme')->nullable()->comment("1: Hibrido, 2: Latam");
             $table->timestamps();
         });
     }

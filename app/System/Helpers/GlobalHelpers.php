@@ -3,6 +3,8 @@
 Este archivo es de helpers globales para su uso solo debe llamarse la funcion
 */
 
+use Illuminate\Support\Facades\View;
+
     function flashCode($code){ // Los 5 primeros digitos de una cadena
         return strtoupper(substr($code,0, 5));  
     }
@@ -137,3 +139,15 @@ Este archivo es de helpers globales para su uso solo debe llamarse la funcion
       }
       return null; // Municipio no encontrado
   }
+
+      /**
+     * establece la vista si existe segun numero de  tenant o establece la default
+     */
+    function formatView($path, $nit, $viewName)
+    {
+         if (View::exists($path .'.'.$nit.'.'.$viewName)) {
+              return $path .'.'.$nit.'.'.$viewName;
+         } else {
+              return $path .'.default.'.$viewName;
+         }
+    }

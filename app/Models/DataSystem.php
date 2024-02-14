@@ -11,4 +11,12 @@ class DataSystem extends Model
     use HasFactory, HasUuids;
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
+
+    public function client(){
+        return $this->hasOne(Client::class, 'id', 'client_id');
+    }
+    
+    public function tenant(){
+        return $this->hasOne(Tenants::class, 'id', 'tenant_id');
+    }
 }
