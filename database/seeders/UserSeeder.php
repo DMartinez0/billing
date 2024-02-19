@@ -24,7 +24,7 @@ class UserSeeder extends Seeder
             'password' => bcrypt('007125-'),
             'remember_token' => Str::random(10),
             'type' => 1
-        ]);
+        ])->assignRole('Root');
         // ])->assignRole('Gerente');
 
     User::create([
@@ -34,8 +34,7 @@ class UserSeeder extends Seeder
         'password' => bcrypt('Hibrido*1-'),
         'remember_token' => Str::random(10),
         'type' => 1
-    ]);
-    // ])->assignRole('Gerente');
+    ])->assignRole('Gerente');
 
         
         // User::factory(9)->create();
