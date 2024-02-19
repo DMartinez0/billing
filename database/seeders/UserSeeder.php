@@ -27,14 +27,14 @@ class UserSeeder extends Seeder
         ])->assignRole('Root');
         // ])->assignRole('Gerente');
 
-    User::create([
-        'name' => 'administracion',
-        'email' => 'admin@hibridosv.com',
-        'email_verified_at' => now(),
-        'password' => bcrypt('Hibrido*1-'),
-        'remember_token' => Str::random(10),
-        'type' => 1
-    ])->assignRole('Gerente');
+    // User::create([
+    //     'name' => 'administracion',
+    //     'email' => 'admin@hibridosv.com',
+    //     'email_verified_at' => now(),
+    //     'password' => bcrypt('Hibrido*1-'),
+    //     'remember_token' => Str::random(10),
+    //     'type' => 1
+    // ])->assignRole('Gerencia');
 
         
         // User::factory(9)->create();
