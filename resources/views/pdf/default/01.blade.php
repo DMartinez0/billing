@@ -247,26 +247,26 @@ table td.letras {
             <td class="service">{{ $producto['numItem'] }}</td>
             <td class="desc">{{ $producto['descripcion'] }}</td>
             <td>{{ $producto['codigo'] }}</td>
-            <td>{{ $producto['precioUni'] }}</td>
-            <td>{{ $producto['montoDescu'] }}</td>
-            <td class="total">{{ $producto['ventaGravada'] }}</td>
+            <td>${{ toMoney($producto['precioUni']) }}</td>
+            <td>${{ toMoney($producto['montoDescu']) }}</td>
+            <td class="total">${{ toMoney($producto['ventaGravada']) }}</td>
           </tr>
           @endforeach
           <tr>
             <td colspan="5">Suma total de operaciones</td>
-            <td class="total">${{$request['resumen']['subTotalVentas']}}</td>
+            <td class="total">${{ toMoney($request['resumen']['subTotalVentas']) }}</td>
           </tr>
           <tr>
             <td colspan="5">Monto total de descuentos</td>
-            <td class="total">${{$request['resumen']['totalDescu']}}</td>
+            <td class="total">${{ toMoney($request['resumen']['totalDescu']) }}</td>
           </tr>
           <tr>
             <td colspan="5">Monto total de Operaciones</td>
-            <td class="total">${{$request['resumen']['montoTotalOperacion']}}</td>
+            <td class="total">${{ toMoney($request['resumen']['montoTotalOperacion']) }}</td>
           </tr>
           <tr>
             <td colspan="5" class="grand total">TOTAL A PAGAR</td>
-            <td class="grand total">${{$request['resumen']['pagos'][0]['montoPago']}}</td>
+            <td class="grand total">${{ toMoney($request['resumen']['pagos'][0]['montoPago']) }}</td>
           </tr>
           <tr>
             <td colspan="6" class="letras">TOTAL EN LETRAS: {{$request['resumen']['totalLetras']}}</td>

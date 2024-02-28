@@ -12,7 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('linked_systems', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
+            $table->uuid('tenan_to_id');
+            $table->foreign('tenan_to_id')
+                            ->references('id')
+                            ->on('tenants');
+
+            $table->uuid('tenan_from_id');
+            $table->foreign('tenan_from_id')
+                            ->references('id')
+                            ->on('tenants');
+            $table->integer('status')->nullable()->comment('1: Activo, 0: Inactivo'); 
             $table->timestamps();
         });
     }
