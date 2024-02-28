@@ -12,7 +12,7 @@ trait Firmador {
             'Accept' => 'application/json',
             'Content-Type' => 'application/json'
         ])
-        ->post("https://seahorse-app-fem4j.ondigitalocean.app/firmardocumento/", [
+        ->post(config("principal.firmador"), [
             'nit' => $request->nit,
             'activo' => true,
             'passwordPri' => $request->passwordPri,

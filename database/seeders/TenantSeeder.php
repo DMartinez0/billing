@@ -23,15 +23,5 @@ class TenantSeeder extends Seeder
             'type' => 1,
             'system' => 1
         ]);
-        Tenants::create([
-            'name' => 'Connect 2',
-            'domain' => 'test2.connect.test',
-            'hostname' => '127.0.0.1',
-            'database' => 'connect2',
-            'username' => 'root',
-            'description' => 'Segundo tenant',
-            'type' => 1,
-            'system' => 1
-        ]);
     }
 }
