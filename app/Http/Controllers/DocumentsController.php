@@ -78,7 +78,7 @@ class DocumentsController extends Controller
                              ->where('client_id', $clientId)
                              ->first();
 
-        if(!$sellado) return errorResponse("No se encuentra el documento");
+        if(!isset($sellado)) return errorResponse("No se encuentra el documento");
         return $this->downloadPdf(json_decode($sellado->documento_sellado, true));
     }
 
