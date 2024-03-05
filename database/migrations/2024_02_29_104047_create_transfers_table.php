@@ -21,11 +21,11 @@ return new class extends Migration
             $table->foreign('to_tenant_id')
                 ->references('id')
                 ->on('tenants');
-            $table->string('send');
-            $table->string('receive');
+            $table->string('send')->comment('Usuaario que envia');
+            $table->string('receive')->comment('Usuaario que recibe');
             $table->timestamp('received_at')->nullable()->comment('Hora de recibido'); 
             $table->timestamp('canceled_at')->nullable()->comment('Hora de rechazado'); 
-            $table->string('canceled_by');
+            $table->string('canceled_by')->nullable()->comment('Usuario que cancela el pedido'); 
             $table->text('comment_send')->nullable()->comment('Comentario de envio'); 
             $table->text('comment_receive')->nullable()->comment('Comentario de recibo'); 
             $table->integer('status')->comment('1: Activo, 2: Aceptado, 0: Eliminado, 3: Rechazado, 4: Parcialmente Aceptado'); 
