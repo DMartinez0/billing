@@ -16,8 +16,9 @@ return new class extends Migration
             $table->uuid('transfer_id')->nullable();
             $table->foreign('transfer_id')
                     ->references('id')
-                    ->on('transfers');           
-            $table->uuid('id_product');
+                    ->on('transfers')
+                    ->onDelete('cascade');         
+            $table->json('product_json');
             $table->string('cod');
             $table->string('description');
             $table->float('quantity');

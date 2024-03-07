@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('linked_systems', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->unsignedBigInteger('tenan_to_id');
-            $table->foreign('tenan_to_id')
+            $table->unsignedBigInteger('to_tenant_id');
+            $table->foreign('to_tenant_id')
                             ->references('id')
                             ->on('tenants');
 
-            $table->unsignedBigInteger('tenan_from_id');
-            $table->foreign('tenan_from_id')
+            $table->unsignedBigInteger('from_tenant_id');
+            $table->foreign('from_tenant_id')
                             ->references('id')
                             ->on('tenants');
             $table->integer('status')->nullable()->comment('1: Activo, 0: Inactivo'); 
