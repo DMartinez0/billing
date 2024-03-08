@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('canceled_by')->nullable()->comment('Usuario que cancela el pedido'); 
             $table->text('comment_send')->nullable()->comment('Comentario de envio'); 
             $table->text('comment_receive')->nullable()->comment('Comentario de recibo'); 
+            $table->integer('is_online')->comment('0: Sin productos online, 1: Con productos Online || si aun hay productos aceptados o rechazados debe estar online'); 
             $table->integer('status')->comment('0: Eliminado, 1: En Progreso, 2: Activo, 3: Parcialmente Aceptado, 4: Aceptado, 5: Rechazado'); 
             $table->timestamps();
         });
