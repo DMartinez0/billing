@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('description');
             $table->float('quantity');
             $table->string('cod_receive');
+            $table->integer('create')->default(0)->comment('1: crear registro, 0: sin crear registro'); 
             $table->integer('status')->comment('1: Activo, 2: Aceptado, 3: Rechazado'); 
             $table->timestamps();
         });
