@@ -15,7 +15,11 @@ class RemoteUrlController extends Controller
      * 
      */
     public function oauth(Request $request){
-        $url = RemoteUrl::where('email', $request->email)->first();
+        if ($request["change"]) {
+            $url = RemoteUrl::where('email', $request->email)->where('url', $request->change)->first();
+        } else {
+            $url = RemoteUrl::where('email', $request->email)->first();
+        }
         if ($url) {
             return response()->json([
                 'url' => $url->url, 
@@ -24,7 +28,6 @@ class RemoteUrlController extends Controller
                 'system' => Tenants::where('domain', Str::of($url->url)->afterLast('//'))->first()->id,
             ], 200);
         }
-
         return errorResponse("Usuario o contraseña incorrecta");
     }
 
