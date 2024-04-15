@@ -22,6 +22,10 @@ return new class extends Migration
             $table->string('cod');
             $table->string('description');
             $table->float('quantity');
+
+            $table->float('requested');
+            $table->integer('requested_exists')->comment('1: Existe en el host que enviara, 0: No existe'); 
+
             $table->string('cod_receive');
             $table->integer('create')->default(0)->comment('1: crear registro, 0: sin crear registro'); 
             $table->integer('status')->comment('1: Activo, 2: Aceptado, 3: Rechazado'); 

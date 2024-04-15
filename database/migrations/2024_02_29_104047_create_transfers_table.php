@@ -26,6 +26,10 @@ return new class extends Migration
             $table->timestamp('received_at')->nullable()->comment('Hora de recibido'); 
             $table->timestamp('canceled_at')->nullable()->comment('Hora de rechazado'); 
             $table->string('canceled_by')->nullable()->comment('Usuario que cancela el pedido'); 
+            
+            $table->timestamp('request_at')->nullable()->comment('Hora de solicitud del producto'); 
+            $table->string('request_by')->comment('Usuario que solicita el producto');
+            
             $table->text('comment_send')->nullable()->comment('Comentario de envio'); 
             $table->text('comment_receive')->nullable()->comment('Comentario de recibo'); 
             $table->integer('is_online')->comment('0: Sin productos online, 1: Con productos Online || si aun hay productos aceptados o rechazados debe estar online'); 
