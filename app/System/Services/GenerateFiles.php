@@ -6,10 +6,10 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
-trait GenerarArchivos {
+trait GenerateFiles {
 
 
-    public function crearJson($request)
+    public function createJson($request)
     {
         try {
             Storage::disk('local')
@@ -19,7 +19,7 @@ trait GenerarArchivos {
         }
     }
 
-    public function crearPdf($request)
+    public function createPdf($request)
     {
         try {
             $pdf = Pdf::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])
@@ -31,7 +31,7 @@ trait GenerarArchivos {
         }
     }
 
-    public function crearQR($request)
+    public function createQR($request)
     {
         try {
             $carpeta = storage_path('/app/public/qr/');
@@ -46,7 +46,7 @@ trait GenerarArchivos {
     }
 
 
-    public function eliminarArchivos($request)
+    public function deleteFiles($request)
     {
         try {
             $codigoGeneracion = $request['identificacion']['codigoGeneracion'];
@@ -69,11 +69,11 @@ trait GenerarArchivos {
     public function downloadPdf($request)
     {
         try {
-            $this->crearQR($request);
+            $this->createQR($request);
             $pdf = Pdf::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])
                         ->loadView(formatView('pdf', $request['emisor']['nit'], $request['identificacion']['tipoDte']), compact('request'));
             $response =  $pdf->download($request['identificacion']['codigoGeneracion'] .'.pdf');
-            $this->eliminarArchivos($request);
+            $this->deleteFiles($request);
             return $response;
         } catch (\Throwable $th) {
             Log::alert("Error al crear archivo PDF: " . $th->getMessage());

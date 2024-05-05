@@ -3,16 +3,16 @@ namespace App\System\Services;
 
 use Illuminate\Support\Facades\Http;
 
-trait Firmador {
+trait Signer {
 
 
-    public function firmarDocumento($request)
+    public function signDocument($request)
     {
         $firma = Http::withHeaders([
             'Accept' => 'application/json',
             'Content-Type' => 'application/json'
         ])
-        ->post(config("principal.firmador"), [
+        ->post(config("principal.signer"), [
             'nit' => $request->nit,
             'activo' => true,
             'passwordPri' => $request->passwordPri,

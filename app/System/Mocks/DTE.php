@@ -3,7 +3,7 @@ namespace App\System\Mocks;
 
 trait DTE {
 
-    public function respuestaProcesado()
+    public function processResponse()
     {
         $json = '{
                     "version": 2,
@@ -22,7 +22,7 @@ trait DTE {
     }
 
    
-    public function respuestaRechazado()
+    public function rejectResponse()
     {
         $json = '{
                     "version": 2,

@@ -1,22 +1,22 @@
 <?php
 namespace App\System\Services;
 
-use App\Mail\EnviarFacturaMailable;
+use App\Mail\SendInvoiceMailable;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
-trait EnviarEmail {
+trait SendEmail {
 
-    use GuardarDTE;
+    use SaveDTE;
 
-    public function enviarEmailCliente($cliente, $request, $documentId)
+    public function sendEmailClient($cliente, $request, $documentId)
     {
         if (isset($request['receptor']) && isset($request['receptor']['correo'])) {
             try {
                 Mail::to($request['receptor']['correo'])
-                ->send(new EnviarFacturaMailable($cliente, $request));
-                $this->guardarEmailEnviado($documentId);
-                $this->eliminarArchivos($request);          
+                ->send(new SendInvoiceMailable($cliente, $request));
+                $this->saveEmailSended($documentId);
+                $this->deleteFiles($request);          
             } catch (\Throwable $th) {
                 Log::alert("No se envio el Email: " . $th->getMessage());
             }

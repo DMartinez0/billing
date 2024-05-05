@@ -3,10 +3,10 @@ namespace App\System\Services;
 
 use Illuminate\Support\Arr;
 
-trait ModificarJson {
+trait ModifierJson {
 
 
-    public function agregarValoresIniciales($request, $cliente)
+    public function addInitialValues($request, $cliente)
     {
         $emisor = array();
         $emisor["nit"] = $cliente->nit;
@@ -36,8 +36,8 @@ trait ModificarJson {
         return $request;
     }
 
-
-    public function agregarSellos($request, $firma, $dte)
+//no se llama desde ningun lugar esta funcion
+    public function addStamps($request, $firma, $dte)
     {
         $newFirma = array();
         $newFirma["firmaElectronica"] = $firma;

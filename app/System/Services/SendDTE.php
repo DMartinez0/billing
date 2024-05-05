@@ -7,27 +7,27 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
-trait EnviarDTE {
+trait SendDTE {
 
-    use GenerarArchivos, EnviarEmail, GuardarDTE, DTE;
+    use GenerateFiles, SendEmail, SaveDTE, DTE;
 
-    public function procesarDTE($request, $documentId, $firma, $cliente)
+    public function processDTE($request, $documentId, $firma, $cliente)
     {
         $dte = $this->dte($request, $firma, $cliente);
-        // $dte = $this->respuestaProcesado();
+        // $dte = $this->processResponse();
         if ($dte) {
             if ($dte['estado'] == "RECHAZADO") {
                 // Guardar los dados de rechazo
-                $this->guardarRechazado($documentId, $dte);
+                $this->saveRejected($documentId, $dte);
             } else {
                 // Guardar la respuesta del MH (selloRecibido)
                 $firmado = Arr::add($request->dteJson, 'firmaElectronica', $firma);
                 $sellado = Arr::add($firmado, 'responseMH', json_decode($dte, true));
-                $this->guardarProcesado($sellado, $documentId, $dte); //
-                $this->crearJson($sellado);
-                $this->crearQR($sellado);
-                $this->crearPdf($sellado);
-                $this->enviarEmailCliente($cliente, $sellado, $documentId);  
+                $this->saveProcessed($sellado, $documentId, $dte); //
+                $this->createJson($sellado);
+                $this->createQR($sellado);
+                $this->createPdf($sellado);
+                $this->sendEmailClient($cliente, $sellado, $documentId);  
             }
             return json_decode($dte, true);
             // return $dte;
@@ -106,7 +106,7 @@ trait EnviarDTE {
 
 
         if ($token['status'] == "OK") {
-            $this->guardarToken($cliente, $token['body']['token']);
+            $this->saveToken($cliente, $token['body']['token']);
             return $token['body']['token'];
         }
         return null;

@@ -6,16 +6,16 @@ use App\Http\Requests\DocumentsRequest;
 use App\Models\Client;
 use App\Models\Document;
 use App\Models\User;
-use App\System\Services\EnviarDTE;
-use App\System\Services\Firmador;
-use App\System\Services\GenerarArchivos;
-use App\System\Services\GuardarDTE;
-use App\System\Services\ModificarJson;
+use App\System\Services\SendDTE;
+use App\System\Services\Signer;
+use App\System\Services\GenerateFiles;
+use App\System\Services\SaveDTE;
+use App\System\Services\ModifierJson;
 
 class DocumentsController extends Controller
 {
 
-    use Firmador, GuardarDTE, EnviarDTE, ModificarJson, GenerarArchivos;
+    use Signer, SaveDTE, SendDTE, ModifierJson, GenerateFiles;
 
 
     public function index($clientId){
@@ -38,15 +38,15 @@ class DocumentsController extends Controller
         $cliente = Client::find($request->id_sistema);
         if(!$cliente) return errorResponse("No se encuentra el cliente");
         // Agregar el emisor y clave desde la base de datos
-        $request = $this->agregarValoresIniciales($request, $cliente);
+        $request = $this->addInitialValues($request, $cliente);
         // Guardar documento sin firmar y obtener el id
-        $documentId = $this->guardarDocument($request, $cliente); ///
+        $documentId = $this->saveDocument($request, $cliente); ///
         // Firmar documento
-        $firma = $this->firmarDocumento($request);
+        $firma = $this->signDocument($request);
         if ($firma) {
-            $this->guardarFirma($documentId, $firma);
+            $this->saveSignature($documentId, $firma);
             // return successResponse("Documento Firmado!");
-            return $this->procesarDTE($request, $documentId, $firma, $cliente);
+            return $this->processDTE($request, $documentId, $firma, $cliente);
         } else {
             return errorResponse("Error al firmar el documento");
         }

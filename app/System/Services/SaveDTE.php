@@ -5,9 +5,9 @@ use App\Models\Client;
 use App\Models\Document;
 use Illuminate\Support\Arr;
 
-trait GuardarDTE {
+trait SaveDTE {
 
-    public function guardarDocument($request, $cliente)
+    public function saveDocument($request, $cliente)
     {
        $document =  Document::create([
             'ambiente'=> $request->dteJson['identificacion']['ambiente'],
@@ -27,13 +27,13 @@ trait GuardarDTE {
     }
 
 
-    public function guardarFirma($documentId, $firma)
+    public function saveSignature($documentId, $firma)
     {
         Document::where('id', $documentId)->update(['documento_firmado' => $firma, 'status' => 2]);
     }
 
 
-    public function guardarRechazado($documentId, $dte)
+    public function saveRejected($documentId, $dte)
     {
         Document::where('id', $documentId)->update([
             'fecha_procesamiento' => $dte['fhProcesamiento'], 
@@ -46,7 +46,7 @@ trait GuardarDTE {
     }
 
 
-    public function guardarProcesado($firmado, $documentId, $dte)
+    public function saveProcessed($firmado, $documentId, $dte)
     {   
         Document::where('id', $documentId)->update([
             'documento_sellado' => json_encode($firmado), 
@@ -61,13 +61,13 @@ trait GuardarDTE {
     }
 
     
-    public function guardarEmailEnviado($documentId)
+    public function saveEmailSended($documentId)
     {   
         Document::where('id', $documentId)->update(['email' => 1,]);
     }
 
 
-    public function guardarToken($cliente, $token)
+    public function saveToken($cliente, $token)
     {
         Client::where('id', $cliente->id)->update(['token' => $token, 'token_updated_at' => now()]);
     }

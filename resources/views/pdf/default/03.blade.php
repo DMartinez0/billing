@@ -194,7 +194,7 @@ table td.letras {
                 <div><span>NIT</span> {{ $request['emisor']['nit'] }}</div>
                 <div><span>NCR</span> {{ $request['emisor']['nrc'] }}</div>
                 <div><span>Actividad Economica</span> {{ $request['emisor']['descActividad'] }}</div>
-                <div><span>Dirección</span> {{ $request['emisor']['direccion']['complemento'] }}, {{ nombreMunicipio($request['emisor']['direccion']['departamento'], $request['emisor']['direccion']['municipio']) }}, {{ nombreDepartamento($request['emisor']['direccion']['departamento']) }}</div>
+                <div><span>Dirección</span> {{ $request['emisor']['direccion']['complemento'] }}, {{ townName($request['emisor']['direccion']['departamento'], $request['emisor']['direccion']['municipio']) }}, {{ departamentName($request['emisor']['direccion']['departamento']) }}</div>
                 <div><span>Numero de telefono</span> {{ $request['emisor']['telefono'] }}</div>
                 <div><span>Email</span> {{ $request['emisor']['correo'] }}</div>
                 <div><span>Establicimiento</span> {{ $request['emisor']['tipoEstablecimiento'] }}</div>
@@ -205,7 +205,7 @@ table td.letras {
               <div><span>NIT</span> {{ $request['receptor']['nit'] }}</div>
               <div><span>NCR</span> {{ $request['receptor']['nrc'] }}</div>
               <div><span>Actividad Economica</span> {{ $request['receptor']['descActividad'] }}</div>
-              <div><span>Dirección</span> {{ $request['receptor']['direccion']['complemento'] }}, {{ nombreMunicipio($request['receptor']['direccion']['departamento'], $request['receptor']['direccion']['municipio']) }}, {{ nombreDepartamento($request['receptor']['direccion']['departamento']) }}</div>
+              <div><span>Dirección</span> {{ $request['receptor']['direccion']['complemento'] }}, {{ townName($request['receptor']['direccion']['departamento'], $request['receptor']['direccion']['municipio']) }}, {{ departamentName($request['receptor']['direccion']['departamento']) }}</div>
               <div><span>Numero de telefono</span> {{ $request['receptor']['telefono'] }}</div>
               <div><span>Email</span> {{ $request['receptor']['correo'] }}</div>
             </div>

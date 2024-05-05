@@ -11,7 +11,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class EnviarFacturaMailable extends Mailable
+class SendInvoiceMailable extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -19,12 +19,12 @@ class EnviarFacturaMailable extends Mailable
      * Create a new message instance.
      */
 
-     public $cliente;
+     public $client;
      public $request;
 
-    public function __construct($cliente, $request)
+    public function __construct($client, $request)
     {
-        $this->cliente = $cliente;
+        $this->client = $client;
         $this->request = $request;
     }
 
@@ -34,7 +34,7 @@ class EnviarFacturaMailable extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address('factura@hibridosv.com', $this->cliente->nombre_comercial),
+            from: new Address('factura@hibridosv.com', $this->client->nombre_comercial),
             subject: 'Comprobante de Documento Tributario Electrónico',
         );
     }
@@ -45,7 +45,7 @@ class EnviarFacturaMailable extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: formatView('emails', $this->cliente->nit, 'factura'),
+            view: formatView('emails', $this->client->nit, 'invoice'),
         );
     }
 

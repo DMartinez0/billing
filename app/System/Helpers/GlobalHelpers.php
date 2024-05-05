@@ -106,7 +106,7 @@ use Illuminate\Support\Facades\View;
 
 
    
-   function nombreDepartamento($idDepartamento) {
+   function departamentName($idDepartamento) {
       $rutaArchivoJson = public_path('el-salvador.json');
       if (file_exists($rutaArchivoJson)) {
          $contenidoJson = file_get_contents($rutaArchivoJson);
@@ -121,7 +121,7 @@ use Illuminate\Support\Facades\View;
       return null; // Departamento no encontrado
   }
   
-  function nombreMunicipio($idDepartamento, $idMunicipio) {
+  function townName($idDepartamento, $idMunicipio) {
       $rutaArchivoJson = public_path('el-salvador.json');
       if (file_exists($rutaArchivoJson)) {
          $contenidoJson = file_get_contents($rutaArchivoJson);
