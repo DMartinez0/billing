@@ -32,10 +32,10 @@ return new class extends Migration
             $table->string('cod_punto_venta')->nullable();
 
 
-            $table->uuid('user_id')->nullable();
-            $table->foreign('user_id')
+            $table->unsignedBigInteger('tenant_id')->nullable();
+            $table->foreign('tenant_id')
                             ->references('id')
-                            ->on('users');
+                            ->on('tenants');
             $table->text('pwd')->nullable()->comment('pwd API MH'); 
             $table->text('password_pri')->nullable()->comment('clave privada'); 
             $table->text('token')->nullable()->comment('Token de autenticacion'); 

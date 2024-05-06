@@ -16,11 +16,13 @@ return new class extends Migration
             $table->unsignedBigInteger('from_tenant_id')->nullable();
             $table->foreign('from_tenant_id')
                 ->references('id')
-                ->on('tenants');
+                ->on('tenants')
+                ->onDelete('cascade');
             $table->unsignedBigInteger('to_tenant_id')->nullable();
             $table->foreign('to_tenant_id')
                 ->references('id')
-                ->on('tenants');
+                ->on('tenants')
+                ->onDelete('cascade');
             $table->string('send')->comment('Usuaario que envia');
             $table->string('receive')->comment('Usuaario que recibe');
             $table->timestamp('received_at')->nullable()->comment('Hora de recibido'); 

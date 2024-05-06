@@ -29,7 +29,8 @@ return new class extends Migration
             $table->unsignedBigInteger('tenant_id')->nullable();
             $table->foreign('tenant_id')
                 ->references('id')
-                ->on('tenants');
+                ->on('tenants')
+                ->onDelete('cascade');
             $table->string('url');
             $table->string('logo')->nullable();
             $table->integer('theme')->nullable()->comment("1: Hibrido, 2: Latam");

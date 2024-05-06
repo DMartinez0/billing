@@ -16,12 +16,14 @@ return new class extends Migration
             $table->unsignedBigInteger('to_tenant_id');
             $table->foreign('to_tenant_id')
                             ->references('id')
-                            ->on('tenants');
+                            ->on('tenants')
+                            ->onDelete('cascade');
 
             $table->unsignedBigInteger('from_tenant_id');
             $table->foreign('from_tenant_id')
                             ->references('id')
-                            ->on('tenants');
+                            ->on('tenants')
+                            ->onDelete('cascade');
             $table->integer('status')->nullable()->comment('1: Activo, 0: Inactivo'); 
             $table->timestamps();
         });
