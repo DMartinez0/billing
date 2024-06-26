@@ -30,7 +30,9 @@
 
 				<!-- Footer -->
 					<footer id="footer">
-						<span class="copyright">&copy; <a href="http://hibridosv.com">Hibrido</a>. Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})</span>
+						<span class="copyright">&copy; <a href="http://hibridosv.com">Hibrido</a>.
+							 {{-- Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }}) --}}
+							</span>
 					</footer>
 
 			</div>

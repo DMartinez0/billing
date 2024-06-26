@@ -21,6 +21,7 @@ return new class extends Migration
             $table->text('description')->nullable()->comment("Descripcion del sistema");
             $table->integer('type')->comment('1: Permanent, 2: Monthy');
             $table->integer('system')->nullable()->comment('1: Productos Hibrido, 2: Productos Latam, 3: Restaurante Hibrido, 3: Restaurante Latam');
+            $table->integer('status')->default(0)->comment('1: Activo, 2: Inactivo');
             $table->timestamps();
         });
     }

@@ -31,7 +31,6 @@ return new class extends Migration
                 ->references('id')
                 ->on('tenants')
                 ->onDelete('cascade');
-            $table->string('url');
             $table->string('logo')->nullable();
             $table->integer('theme')->nullable()->comment("1: Hibrido, 2: Latam");
             $table->timestamps();
