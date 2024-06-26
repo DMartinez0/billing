@@ -173,8 +173,8 @@ table td.letras {
     </style>
   </head>
   <body>
-    <h1>COMPROBANTE DE CREDITO FISCAL</h1>
-    <header class="clearfix">
+    <h1>COMPROBANTE FACTURA SUJETO EXCLUIDO</h1>
+    {{-- <header class="clearfix">
       
       <div id="logo">
         <img src="https://api-connect.hibridosv.com/images/invoice/logo.jpg" width="150">
@@ -287,6 +287,6 @@ table td.letras {
             </div>
         </div>
 
-    </main>
+    </main> --}}
   </body>
 </html>
