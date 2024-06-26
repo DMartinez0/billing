@@ -9,13 +9,12 @@ trait ModifierJson {
     public function addInitialValues($request, $cliente)
     {
         $emisor = array();
+        
         $emisor["nit"] = $cliente->nit;
         $emisor["nrc"] = $cliente->ncr;
         $emisor["nombre"] = $cliente->nombre;
         $emisor["codActividad"] = $cliente->cod_actividad;
         $emisor["descActividad"] = $cliente->desc_actividad;
-        $emisor["nombreComercial"] = $cliente->nombre_comercial;
-        $emisor["tipoEstablecimiento"] = $cliente->tipo_establecimiento;
         $emisor["direccion"]['departamento'] = $cliente->direccion_departamento;
         $emisor["direccion"]['municipio'] = $cliente->direccion_municipio;
         $emisor["direccion"]['complemento'] = $cliente->direccion_complemento;
@@ -25,7 +24,12 @@ trait ModifierJson {
         $emisor["codEstable"] = $cliente->cod_estable;
         $emisor["codPuntoVentaMH"] = $cliente->cod_punto_venta_mh;
         $emisor["codPuntoVenta"] = $cliente->cod_punto_venta;
-
+        
+        if ($request->dteJson['identificacion']['tipoDte'] != "14") {
+            $emisor["tipoEstablecimiento"] = $cliente->tipo_establecimiento;
+            $emisor["nombreComercial"] = $cliente->nombre_comercial;
+        }
+        
         $requestArray = $request->all();
         Arr::set($requestArray, 'nit', $cliente->nit);
         Arr::set($requestArray, 'activo', true);
@@ -36,9 +40,11 @@ trait ModifierJson {
         return $request;
     }
 
-//no se llama desde ningun lugar esta funcion
+
+
     public function addStamps($request, $firma, $dte)
     {
+        //no se llama desde ningun lugar esta funcion
         $newFirma = array();
         $newFirma["firmaElectronica"] = $firma;
         $newSello["selloRecibido"] = $dte['selloRecibido'];
