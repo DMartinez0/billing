@@ -8,18 +8,10 @@
 </head>
 <body>
     <h3>Estimado(a) {{$request['receptor']['nombre']}}</h3>
-    @if ($client)
     <p>{{$client->nombre_comercial}} agradece su apoyo sumándose a la reducción del consumo de papel y así cuidar juntos de nuestro medio ambiente.</p>
-    @else
-    <p>Agradecemos su apoyo sumándose a la reducción del consumo de papel y así cuidar juntos de nuestro medio ambiente.</p>
-    @endif
     <p>Por este medio le compartimos su Documento Triburario Electrónico el cual puede descargar y consultar dando clic al archivo adjunto. <br>
     Le recordamos mantener sus datos actualizados según su identificación tributaria, para agilizar dicho trámite y a la vez agradecemos su preferencia.
     </p>
-    <p>Cualquier consulta, contactarnos 
-        @if ($client)
-        al Tel. +503 {{$client->telefono}}
-        @endif 
-    </p>
+    <p>Cualquier consulta, contactarnos al Tel. +503 {{$client->telefono}}</p>
 </body>
 </html>
