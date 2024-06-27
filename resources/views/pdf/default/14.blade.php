@@ -212,9 +212,9 @@ table td.letras {
           </div>
 
       </div>
-    </header>
+    </header> --}}
     <main>
-      <table>
+      {{-- <table>
         <thead>
           <tr>
             <th class="service">Cant</th>
@@ -269,7 +269,7 @@ table td.letras {
           </tr>
 
         </tbody>
-      </table>
+      </table> --}}
 
 
           <div id="resumen" class="clearfix">
@@ -287,6 +287,6 @@ table td.letras {
             </div>
         </div>
 
-    </main> --}}
+    </main>
   </body>
 </html>
