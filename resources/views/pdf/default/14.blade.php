@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Comprobante de Credito Fiscal</title>
+    <title>COMPROBANTE FACTURA SUJETO EXCLUIDO</title>
     {{-- <link rel="stylesheet" href="{{ asset('css/style_invoice.css')."?v=".rand(1,1000) }}" media="all"  /> --}}
     <style>
 .clearfix:after {
@@ -174,7 +174,7 @@ table td.letras {
   </head>
   <body>
     <h1>COMPROBANTE FACTURA SUJETO EXCLUIDO</h1>
-    {{-- <header class="clearfix">
+    <header class="clearfix">
       
       <div id="logo">
         <img src="https://api-connect.hibridosv.com/images/invoice/logo.jpg" width="150">
@@ -212,7 +212,7 @@ table td.letras {
           </div>
 
       </div>
-    </header> --}}
+    </header>
     <main>
       {{-- <table>
         <thead>
