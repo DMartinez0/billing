@@ -62,7 +62,6 @@ class DocumentsController extends Controller
         if(!$documento) return errorResponse("No se encuentra el documento");
         return response()->json([
                                 'documento_json' => json_decode($documento->documento_json, true), 
-                                'documento_sellado' => json_decode($documento->documento_sellado, true), 
                                 'status' => $documento->status, 
                                 'email' => $documento->email, 
                                 'descripcion' => $documento->descripcion_msg, 
@@ -79,7 +78,7 @@ class DocumentsController extends Controller
                              ->first();
 
         if(!$sellado) return errorResponse("No se encuentra el documento");
-        return $this->downloadPdf(json_decode($sellado->documento_sellado, true));
+        return $this->downloadPdf(json_decode($sellado->documento_json, true));
     }
 
 

@@ -23,8 +23,6 @@ return new class extends Migration
             
             $table->json('documento_json')->nullable()->comment('Documento Original');
             $table->text('documento_firmado')->nullable()->comment('Documento convertido a JWT o firmado');
-            $table->json('documento_sellado')->nullable()->comment('Documento final del cliente'); // documento final
-            
             $table->string('sello_recibido')->nullable()->comment('Sello que devuelve de recibido');
             $table->string('fecha_procesamiento')->nullable();
             $table->string('clasificacion_msg')->nullable();

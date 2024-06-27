@@ -184,9 +184,7 @@ table td.letras {
       </div>
 
       <div id="contenheader">
-          {{-- @if ($request['emisor']['nombreComercial'])
-          <h2>{{ $request['emisor']['nombreComercial'] }}</h2>
-          @endif --}}
+
           <div id="content">
             <div id="project">
                 <div>EMISOR</div>

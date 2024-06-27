@@ -49,7 +49,8 @@ trait SaveDTE {
     public function saveProcessed($firmado, $documentId, $dte)
     {   
         Document::where('id', $documentId)->update([
-            'documento_sellado' => json_encode($firmado), 
+            'documento_json' => json_encode($firmado), 
+            'documento_firmado' => null,
             'sello_recibido' => $dte['selloRecibido'], 
             'fecha_procesamiento' => $dte['fhProcesamiento'], 
             'clasificacion_msg' => $dte['clasificaMsg'], 
