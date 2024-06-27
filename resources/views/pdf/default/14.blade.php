@@ -182,7 +182,7 @@ table td.letras {
         <img src="{{ asset('storage/qr/'.$request['identificacion']['codigoGeneracion'].'.svg') }}" width="150">
         
       </div>
-
+{{-- 
       <div id="contenheader">
           @if ($request['emisor']['nombreComercial'])
           <h2>{{ $request['emisor']['nombreComercial'] }}</h2>
@@ -211,7 +211,7 @@ table td.letras {
             </div>
           </div>
 
-      </div>
+      </div> --}}
     </header>
     <main>
       {{-- <table>
