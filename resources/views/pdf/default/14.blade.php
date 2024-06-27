@@ -183,10 +183,10 @@ table td.letras {
         
       </div>
 
-      {{-- <div id="contenheader">
-          @if ($request['emisor']['nombreComercial'])
+      <div id="contenheader">
+          {{-- @if ($request['emisor']['nombreComercial'])
           <h2>{{ $request['emisor']['nombreComercial'] }}</h2>
-          @endif
+          @endif --}}
           <div id="content">
             <div id="project">
                 <div>EMISOR</div>
@@ -197,79 +197,61 @@ table td.letras {
                 <div><span>Dirección</span> {{ $request['emisor']['direccion']['complemento'] }}, {{ townName($request['emisor']['direccion']['departamento'], $request['emisor']['direccion']['municipio']) }}, {{ departamentName($request['emisor']['direccion']['departamento']) }}</div>
                 <div><span>Numero de telefono</span> {{ $request['emisor']['telefono'] }}</div>
                 <div><span>Email</span> {{ $request['emisor']['correo'] }}</div>
-                <div><span>Establicimiento</span> {{ $request['emisor']['tipoEstablecimiento'] }}</div>
             </div>
             <div id="company" class="clearfix">  
-              <div>RECEPTOR</div>
-              <div><span>Nombre</span> {{ $request['receptor']['nombre'] }}</div>
-              <div><span>NIT</span> {{ $request['receptor']['nit'] }}</div>
-              <div><span>NCR</span> {{ $request['receptor']['nrc'] }}</div>
-              <div><span>Actividad Economica</span> {{ $request['receptor']['descActividad'] }}</div>
-              <div><span>Dirección</span> {{ $request['receptor']['direccion']['complemento'] }}, {{ townName($request['receptor']['direccion']['departamento'], $request['receptor']['direccion']['municipio']) }}, {{ departamentName($request['receptor']['direccion']['departamento']) }}</div>
-              <div><span>Numero de telefono</span> {{ $request['receptor']['telefono'] }}</div>
-              <div><span>Email</span> {{ $request['receptor']['correo'] }}</div>
+              <div>SUJETO EXCLUIDO</div>
+              <div><span>Nombre</span> {{ $request['sujetoExcluido']['nombre'] }}</div>
+              <div><span>NIT o DUI</span> {{ $request['sujetoExcluido']['numDocumento'] }}</div>
+              <div><span>Actividad Economica</span> {{ $request['sujetoExcluido']['descActividad'] }}</div>
+              <div><span>Dirección</span> {{ $request['sujetoExcluido']['direccion']['complemento'] }}, {{ townName($request['sujetoExcluido']['direccion']['departamento'], $request['sujetoExcluido']['direccion']['municipio']) }}, {{ departamentName($request['sujetoExcluido']['direccion']['departamento']) }}</div>
+              <div><span>Numero de telefono</span> {{ $request['sujetoExcluido']['telefono'] }}</div>
+              <div><span>Email</span> {{ $request['sujetoExcluido']['correo'] }}</div>
             </div>
           </div>
 
-      </div> --}}
+      </div>
     </header>
     <main>
-      {{-- <table>
+      <table>
         <thead>
           <tr>
             <th class="service">Cant</th>
             <th class="desc">Descripción</th>
-            <th>Codigo</th>
             <th>Precio</th>
-            <th>Desc. por item</th>
-            <th>No sujetas</th>
-            <th>Exentas</th>
-            <th>Gravadas</th>
+            <th>Total Compra</th>
           </tr>
         </thead>
         <tbody>
             @foreach ($request['cuerpoDocumento'] as $producto)
           <tr>
-            <td class="service">{{ $producto['numItem'] }}</td>
+            <td class="service">{{ $producto['cantidad'] }}</td>
             <td class="desc">{{ $producto['descripcion'] }}</td>
-            <td>{{ $producto['codigo'] }}</td>
-            <td>${{ toMoney($producto['precioUni']) }}</td>
-            <td>${{ toMoney($producto['montoDescu']) }}</td>
-            <td>${{ toMoney($producto['montoDescu']) }}</td>
-            <td>${{ toMoney($producto['montoDescu']) }}</td>
-            <td class="total">${{ toMoney($producto['ventaGravada']) }}</td>
+            <td>{{ $producto['precioUni'] }}</td>
+            <td class="total">${{ toMoney($producto['compra']) }}</td>
           </tr>
           @endforeach
           <tr>
-            <td colspan="7">Subtotal Ventas</td>
-            <td class="total">${{ toMoney($request['resumen']['subTotalVentas'])}}</td>
+            <td colspan="3">SUMAS</td>
+            <td class="total">${{ toMoney($request['resumen']['totalCompra'])}}</td>
           </tr>
           <tr>
-            <td colspan="7">IMPUESTO AL VALOR AGREGADO 13%</td>
-            <td class="total">${{ toMoney($request['resumen']['tributos'][0]['valor'])}}</td>
+            <td colspan="3">(-) RENTA RETENIDO</td>
+            <td class="total">${{ toMoney($request['resumen']['reteRenta'])}}</td>
           </tr>
           <tr>
-            <td colspan="7">Subtotal</td>
+            <td colspan="3">SUBTOTAL</td>
             <td class="total">${{ toMoney($request['resumen']['subTotal']) }}</td>
           </tr>
           <tr>
-            <td colspan="7">Monto total de Operaciones</td>
-            <td class="total">${{toMoney($request['resumen']['montoTotalOperacion'])}}</td>
-          </tr>
-          <tr>
-            <td colspan="7">Total no gravado</td>
-            <td class="total">${{ toMoney($request['resumen']['totalNoGravado'])}}</td>
-          </tr>
-          <tr>
-            <td colspan="7" class="grand total">TOTAL A PAGAR</td>
-            <td class="grand total">${{ toMoney($request['resumen']['pagos'][0]['montoPago'])}}</td>
+            <td colspan="3" class="grand total">TOTAL A PAGAR</td>
+            <td class="grand total">${{ toMoney($request['resumen']['totalPagar'])}}</td>
           </tr>
           <tr>
             <td colspan="8" class="letras">TOTAL EN LETRAS: {{$request['resumen']['totalLetras']}}</td>
           </tr>
 
         </tbody>
-      </table> --}}
+      </table>
 
 
           <div id="resumen" class="clearfix">
