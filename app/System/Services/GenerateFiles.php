@@ -72,7 +72,8 @@ trait GenerateFiles {
             $this->createQR($request);
             $pdf = Pdf::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])
                         ->loadView(formatView('pdf', $request['emisor']['nit'], $request['identificacion']['tipoDte']), compact('request'));
-            $response =  $pdf->download($request['identificacion']['codigoGeneracion'] .'.pdf');
+            $response = $pdf->stream();
+            // $response =  $pdf->download($request['identificacion']['codigoGeneracion'] .'.pdf');
             $this->deleteFiles($request);
             return $response;
         } catch (\Throwable $th) {
