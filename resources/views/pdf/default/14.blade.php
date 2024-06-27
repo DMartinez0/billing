@@ -188,7 +188,7 @@ table td.letras {
           <h2>{{ $request['emisor']['nombreComercial'] }}</h2>
           @endif
           <div id="content">
-            <div id="project">
+            {{-- <div id="project">
                 <div>EMISOR</div>
                 <div><span>Nombre</span> {{ $request['emisor']['nombre'] }}</div>
                 <div><span>NIT</span> {{ $request['emisor']['nit'] }}</div>
@@ -198,8 +198,8 @@ table td.letras {
                 <div><span>Numero de telefono</span> {{ $request['emisor']['telefono'] }}</div>
                 <div><span>Email</span> {{ $request['emisor']['correo'] }}</div>
                 <div><span>Establicimiento</span> {{ $request['emisor']['tipoEstablecimiento'] }}</div>
-            </div>
-            {{-- <div id="company" class="clearfix">  
+            </div> --}}
+            <div id="company" class="clearfix">  
               <div>RECEPTOR</div>
               <div><span>Nombre</span> {{ $request['receptor']['nombre'] }}</div>
               <div><span>NIT</span> {{ $request['receptor']['nit'] }}</div>
@@ -209,7 +209,7 @@ table td.letras {
               <div><span>Numero de telefono</span> {{ $request['receptor']['telefono'] }}</div>
               <div><span>Email</span> {{ $request['receptor']['correo'] }}</div>
             </div>
-          </div> --}}
+          </div>
 
       </div>
     </header>
