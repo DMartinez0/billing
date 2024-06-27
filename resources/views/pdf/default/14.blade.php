@@ -182,7 +182,7 @@ table td.letras {
         <img src="{{ asset('storage/qr/'.$request['identificacion']['codigoGeneracion'].'.svg') }}" width="150">
         
       </div>
-{{-- 
+
       <div id="contenheader">
           @if ($request['emisor']['nombreComercial'])
           <h2>{{ $request['emisor']['nombreComercial'] }}</h2>
@@ -199,7 +199,7 @@ table td.letras {
                 <div><span>Email</span> {{ $request['emisor']['correo'] }}</div>
                 <div><span>Establicimiento</span> {{ $request['emisor']['tipoEstablecimiento'] }}</div>
             </div>
-            <div id="company" class="clearfix">  
+            {{-- <div id="company" class="clearfix">  
               <div>RECEPTOR</div>
               <div><span>Nombre</span> {{ $request['receptor']['nombre'] }}</div>
               <div><span>NIT</span> {{ $request['receptor']['nit'] }}</div>
@@ -209,9 +209,9 @@ table td.letras {
               <div><span>Numero de telefono</span> {{ $request['receptor']['telefono'] }}</div>
               <div><span>Email</span> {{ $request['receptor']['correo'] }}</div>
             </div>
-          </div>
+          </div> --}}
 
-      </div> --}}
+      </div>
     </header>
     <main>
       {{-- <table>
