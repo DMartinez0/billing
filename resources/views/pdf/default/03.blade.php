@@ -68,7 +68,7 @@ h1 {
   text-align: center;
   margin: 0 0 0 0;
   width: 100%;
-  background: url(http://billing.test/images/invoice/dimension.png);
+  background: url(https://api-connect.hibridosv.com/images/invoice/dimension.png);
 }
 
 h2 {
