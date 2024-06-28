@@ -29,33 +29,45 @@ body {
 }
 
 header {
-  padding: 10px 0;
-  margin-bottom: 30px;
+  padding-top: 20px;
+  margin-bottom: 5px;
 }
 
 #logo {
-  width: 90%;
-  text-align: center;
+  width: 25%;
+  text-align: left;
   margin-bottom: 10px;
   margin-top: 5px;
+  display: inline;
+}
+
+#qr {
+  width: 25%;
+  margin-bottom: 10px;
+  margin-top: 5px;
+  float: right;
+}
+
+#qr img {
+  width: 125px;
+  margin-top: 25px;
+
 }
 
 #logo img {
   width: 125px;
-  padding-left: 60px;
-  padding-right: 60px;
+  padding-left: 50px;
+  padding-right: 50px;
 }
 
 h1 {
-  border-top: 1px solid  #5D6975;
-  border-bottom: 1px solid  #5D6975;
   color: #5D6975;
-  font-size: 2.4em;
+  font-size: 1.4em;
   line-height: 1.4em;
   font-weight: normal;
   text-align: center;
-  margin: 0 0 20px 0;
-  width: 90%;
+  margin: 0 0 0 0;
+  width: 100%;
   background: url(http://billing.test/images/invoice/dimension.png);
 }
 
@@ -64,8 +76,8 @@ h2 {
   font-size: 2em;
   line-height: 1.4em;
   font-weight: normal;
-  text-align: center;
-  margin: 0 0 20px 0;
+  text-align: left;
+  margin: 0 0 0 0;
 }
 
 #content {
@@ -76,27 +88,11 @@ h2 {
   float: left;
 }
 
-#project span {
-  color: #5D6975;
-  text-align: right;
-  width: 52px;
-  margin-right: 10px;
-  display: inline-block;
-  font-size: 0.8em;
-}
 
 #company {
   float: right;
 }
 
-#company span {
-  color: #5D6975;
-  text-align: right;
-  width: 52px;
-  margin-right: 10px;
-  display: inline-block;
-  font-size: 0.8em;
-}
 
 #project div,
 #company div {
@@ -110,7 +106,7 @@ table {
   margin-bottom: 20px;
 }
 
-table tr:nth-child(2n-1) td {
+table tr:nth-child(2n) td {
   background: #F5F5F5;
 }
 
@@ -121,7 +117,7 @@ table td {
 
 table th {
   padding: 5px 20px;
-  color: #5D6975;
+  color: #171718;
   border-bottom: 1px solid #C1CED9;
   white-space: nowrap;        
   font-weight: normal;
@@ -162,7 +158,7 @@ table td.letras {
   width: 90%;
   height: 30px;
   position: absolute;
-  bottom: 0;
+  bottom: 30px;
   border-top: 1px solid #C1CED9;
   padding: 8px 0;
   text-align: center;
@@ -170,72 +166,139 @@ table td.letras {
   font-size: 0.8em;
 }
 
+.rectangulo {
+    width: 60%;   
+    height: 140px; 
+    background-color: #ffffff;   
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    border: 1px solid #000;  
+    float: right;
+    margin-right: 70px;
+}
+
+.rectanguloCliente {
+    width: 90%; 
+    height: 75px;   
+    background-color: #ffffff;
+    border-top: 1px solid #5D6975;  
+}
+
+.rectanguloDerecho {
+    width: 35%;  
+    height: 75px;   
+    background-color: #ffffff;  
+    float: right;
+}
+
+.rectanguloIzquierdo {
+    width: 55%;  
+    height: 75px; 
+    background-color: #ffffff; 
+    float: left;
+    margin-left: 0px
+}
+
+#resumen {
+  padding: 10px;
+}
+
+.negritas {
+    font-weight: bold; 
+}
+
+.linea {
+    margin: 0;
+}
+
+.encabezado{
+  background-color: #F5F5F5;
+  
+}
     </style>
   </head>
-  <body>
-    <h1>Documento Tributario Electrónico - Factura</h1>
-    <header class="clearfix">
-      
+  <body>    
       <div id="logo">
-        <img src="https://api-connect.hibridosv.com/images/invoice/logo.png" width="150">
-
-        <img src="{{ asset('storage/qr/'.$request['identificacion']['codigoGeneracion'].'.svg') }}" width="150">
-        
+        <img src="https://api-connect.hibridosv.com/images/invoice/logo.jpg" width="150">      
       </div>
 
-      <div id="contenheader">
-          @if ($request['emisor']['nombreComercial'])
-          <h2>{{ $request['emisor']['nombreComercial'] }}</h2>
-          @endif
-          <div id="content">
-            <div id="project">
-                <div>EMISOR</div>
-                <div><span>Nombre</span> {{ $request['emisor']['nombre'] }}</div>
-                <div><span>NIT</span> {{ $request['emisor']['nit'] }}</div>
-                <div><span>NCR</span> {{ $request['emisor']['nrc'] }}</div>
-                <div><span>Actividad Economica</span> {{ $request['emisor']['descActividad'] }}</div>
-                <div><span>Dirección</span> {{ $request['emisor']['direccion']['complemento'] }}, {{ townName($request['emisor']['direccion']['departamento'], $request['emisor']['direccion']['municipio']) }}, {{ departamentName($request['emisor']['direccion']['departamento']) }}</div>
-                <div><span>Numero de telefono</span> {{ $request['emisor']['telefono'] }}</div>
-                <div><span>Email</span> {{ $request['emisor']['correo'] }}</div>
-                <div><span>Establicimiento</span> {{ $request['emisor']['tipoEstablecimiento'] }}</div>
+      <div class="rectangulo">
+        <h1>Documento Tributario Electrónico</h1>
+        <h1>Factura</h1>
+        <hr class="linea">
+        <div id="resumen" class="clearfix">
+          <div><span class="negritas">Fecha/Hora Emisión:</span> {{ $request['responseMH']['fhProcesamiento'] }}</div>
+          <div><span class="negritas">Codigo Generación:</span> {{ $request['identificacion']['codigoGeneracion'] }}</div>
+          <div><span class="negritas">Numero de Contról:</span> {{ $request['identificacion']['numeroControl'] }}</div>
+          <div><span class="negritas">Sello de Recepción:</span> {{ $request['responseMH']['selloRecibido'] }}</div>
+          <div><span class="negritas">Moneda:</span> {{ $request['identificacion']['tipoMoneda'] }}</div>
+      </div>
+        </div>
+
+        <header class="clearfix">
+          <div id="contenheader">
+            <div id="qr">
+              <img src="{{ asset('storage/qr/'.$request['identificacion']['codigoGeneracion'].'.svg') }}" width="150">
             </div>
-            <div id="company" class="clearfix">
-              @if ($request['receptor'])    
-              <div>RECEPTOR</div>
-                @if ($request['receptor']['nombre'])
-                <div><span>Nombre</span> {{ $request['receptor']['nombre'] }}</div>
-                @endif
-                @if ($request['receptor']['numDocumento'])
-                <div><span>Documento</span> {{ $request['receptor']['numDocumento'] }}</div>
-                @endif
-                @if ($request['receptor']['nrc'])
-                <div><span>NCR</span> {{ $request['receptor']['nrc'] }}</div>
-                @endif
-                @if ($request['receptor']['descActividad'])
-                <div><span>Actividad Economica</span> {{ $request['receptor']['descActividad'] }}</div>
-                @endif
-                @if ($request['receptor']['direccion'])
-                <div><span>Dirección</span> {{ $request['receptor']['direccion']['complemento'] }}, {{ townName($request['receptor']['direccion']['departamento'], $request['receptor']['direccion']['municipio']) }}, {{ departamentName($request['receptor']['direccion']['departamento']) }}</div>
-                @endif
-                @if ($request['receptor']['telefono'])
-                <div><span>Numero de telefono</span> {{ $request['receptor']['telefono'] }}</div>
-                @endif
-                @if ($request['receptor']['correo'])
-                <div><span>Email</span> {{ $request['receptor']['correo'] }}</div>
-                @endif
-              @endif
+              <div id="content">
+                <div id="project">
+                    <div><br></div>
+                    <h2>{{ $request['emisor']['nombre'] }}</h2>
+                    <div><span class="negritas">NIT: </span> {{ $request['emisor']['nit'] }}</div>
+                    <div><span class="negritas">NCR: </span> {{ $request['emisor']['nrc'] }}</div>
+                    <div><span class="negritas">Actividad Economica: </span> {{ $request['emisor']['descActividad'] }}</div>
+                    <div><span class="negritas">Dirección</span> {{ $request['emisor']['direccion']['complemento'] }}, {{ townName($request['emisor']['direccion']['departamento'], $request['emisor']['direccion']['municipio']) }}, {{ departamentName($request['emisor']['direccion']['departamento']) }}</div>
+                    <div><span class="negritas">Numero de telefono: </span> {{ $request['emisor']['telefono'] }}</div>
+                    <div><span class="negritas">Email: </span> {{ $request['emisor']['correo'] }}</div>
+                    <div><span class="negritas">Establecimiento: </span> {{ $request['emisor']['tipoEstablecimiento'] }}</div>
+                </div>
             </div>
           </div>
-
+         
+        </header>
+        @if ($request['receptor'])
+        <div class="rectanguloCliente">
+          <div class="rectanguloIzquierdo">    
+          <div class="negritas">INFORMACION DEL RECEPTOR</div>
+            @if ($request['receptor']['nombre'])
+            <div><span class="negritas">Nombre: </span> {{ $request['receptor']['nombre'] }}</div>
+            @endif
+            @if ($request['receptor']['descActividad'])
+            <div><span class="negritas">Actividad Económica: </span> {{ $request['receptor']['descActividad'] }}</div>
+            @endif
+            @if ($request['receptor']['direccion'])
+            <div><span class="negritas">Dirección: </span> {{ $request['receptor']['direccion']['complemento'] }}, {{ $request['receptor']['direccion']['departamento'], $request['receptor']['direccion']['municipio'] }}, {{ $request['receptor']['direccion']['departamento'] }}</div>
+            @endif
+            @if ($request['receptor']['correo'])
+            <div><span class="negritas">Email: </span> {{ $request['receptor']['correo'] }}</div>
+            @endif
+          @endif
+        </div>
+        @if ($request['receptor']) 
+        <div class="rectanguloDerecho">
+          <div><br></div>
+          @if ($request['receptor']['numDocumento'])
+            <div><span class="negritas">Documento: </span> {{ $request['receptor']['numDocumento'] }}</div>
+            @endif
+            @if ($request['receptor']['nrc'])
+            <div><span class="negritas">NCR: </span> {{ $request['receptor']['nrc'] }}</div>
+            @endif
+            @if ($request['receptor']['telefono'])
+            <div><span class="negritas">Numero de telefono: </span> {{ $request['receptor']['telefono'] }}</div>
+            @endif
+          @endif
+    
+        </div>
       </div>
-    </header>
+
+
+
     <main>
       <table>
         <thead>
           <tr>
             <th class="service">CANT</th>
-            <th class="desc">DESCRIPCION</th>
             <th>CODIGO</th>
+            <th class="desc">DESCRIPCION</th>
             <th>PRECIO</th>
             <th>DESC. POR ITEM</th>
             <th>TOTAL</th>
@@ -244,9 +307,9 @@ table td.letras {
         <tbody>
             @foreach ($request['cuerpoDocumento'] as $producto)
           <tr>
-            <td class="service">{{ $producto['numItem'] }}</td>
-            <td class="desc">{{ $producto['descripcion'] }}</td>
+            <td class="service">{{ $producto['cantidad'] }}</td>
             <td>{{ $producto['codigo'] }}</td>
+            <td class="desc">{{ $producto['descripcion'] }}</td>
             <td>${{ toMoney($producto['precioUni']) }}</td>
             <td>${{ toMoney($producto['montoDescu']) }}</td>
             <td class="total">${{ toMoney($producto['ventaGravada']) }}</td>
@@ -274,17 +337,6 @@ table td.letras {
 
         </tbody>
       </table>
-
-
-          <div id="resumen" class="clearfix">
-              <div><span>Codigo Generación:</span> {{ $request['identificacion']['codigoGeneracion'] }}</div>
-              <div><span>Numero de Contról:</span> {{ $request['identificacion']['numeroControl'] }}</div>
-              <div><span>Sello de Recepción:</span> {{ $request['responseMH']['selloRecibido'] }}</div>
-              <div><span>Fecha/Hora Emisión:</span> {{ $request['responseMH']['fhProcesamiento'] }}</div>
-              <div><span>Moneda:</span> {{ $request['identificacion']['tipoMoneda'] }}</div>
-          </div>
-
-
 
         <div id="notices">
             <div class="notice">Documento Tributário Electrónico emitido y distribuido por Hibrido El Salvador. Fecha de emisión: {{ $request['responseMH']['fhProcesamiento'] }}. Cualquier duda, favor escribir al +503 7665 3304
